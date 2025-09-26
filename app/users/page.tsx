@@ -22,7 +22,7 @@ export default function UsersPage() {
     <div className="p-4">
       <h1 className="text-xl mb-4">Users</h1>
       <UserFilters role={role} onRoleChange={setRole} />
-      <UserTable users={data ?? []} />
+      <UserTable users={data?.data ?? []} />
 
       <div className="mt-4 flex gap-2">
         <button disabled={page === 1} onClick={() => setPage(page - 1)}>
