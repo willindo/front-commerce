@@ -5,14 +5,18 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchUsers } from "@/lib/api/users";
 import UserTable from "./components/UserTable";
 import UserFilters from "./components/UserFilters";
+import { Role } from "@/lib/types/user";
 
 export default function UsersPage() {
   const [page, setPage] = useState(1);
   const [role, setRole] = useState("");
 
+  const roleUnion: Role | undefined =
+    role === "ADMIN" ? "ADMIN" : role === "CUSTOMER" ? "CUSTOMER" : undefined;
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["users", page, role],
-    queryFn: () => fetchUsers(page, 10, role),
+    queryFn: () => fetchUsers(page, 10, roleUnion),
   });
 
   if (isLoading) return <p>Loading users...</p>;
