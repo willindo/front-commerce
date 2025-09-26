@@ -1,3 +1,4 @@
+// "use client";
 // frontend/lib/api.ts
 import axios from "axios";
 

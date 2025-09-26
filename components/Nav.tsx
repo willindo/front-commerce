@@ -1,4 +1,3 @@
-// frontend/components/Nav.tsx
 "use client";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
@@ -9,19 +8,13 @@ export default function Nav() {
   return (
     <nav className="bg-white shadow p-4 flex justify-between">
       <div>
-        <Link href="/">
-          <a className="font-bold">mono-commerce</a>
-        </Link>
+        <Link href="/">mono-commerce</Link>
       </div>
       <div className="space-x-4">
-        <Link href="/products">
-          <a>Products</a>
-        </Link>
+        <Link href="/products">Products</Link>
         {user ? (
           <>
-            <Link href="/profile">
-              <a>Profile</a>
-            </Link>
+            <Link href="/profile">Profile</Link>
             <button
               onClick={() => logout()}
               className="ml-2 text-sm text-red-500"
@@ -31,12 +24,8 @@ export default function Nav() {
           </>
         ) : (
           <>
-            <Link href="/login">
-              <a>Login</a>
-            </Link>
-            <Link href="/register">
-              <a>Register</a>
-            </Link>
+            <Link href="/login">Login</Link>
+            <Link href="/register">Register</Link>
           </>
         )}
       </div>

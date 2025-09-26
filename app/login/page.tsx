@@ -1,4 +1,4 @@
-" use client";
+"use client";
 // frontend/pages/login.tsx
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/AuthContext";

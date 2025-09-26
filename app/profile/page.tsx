@@ -1,4 +1,4 @@
-" use client ";
+"use client";
 // frontend/pages/profile.tsx
 import { useEffect } from "react";
 import Nav from "../../components/Nav";
