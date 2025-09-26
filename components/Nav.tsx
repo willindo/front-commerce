@@ -1,4 +1,5 @@
 // frontend/components/Nav.tsx
+"use client";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
 

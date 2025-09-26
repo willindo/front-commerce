@@ -3,8 +3,32 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+   --step--10: clamp(0.8rem, 0.7rem + 0.3vw, 1rem);
+  --step-11: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  --step-12: clamp(1.25rem, 1.1rem + 0.9vw, 1.75rem);
+  --step-13: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  --step-14: clamp(2rem, 1.8rem + 1.5vw, 3rem);
+  --step-0: clamp(14px, 1.2vw + 10px, 16px);
+  --step-3: clamp(24px, 2.5vw + 14px, 36px);
+  --space: clamp(12px, 1.5vw, 24px);
 }
-
+h1 {
+  font-size: var(--step-3);
+}
+h2 {
+  font-size: var(--step-13);
+  font-weight: bolder;
+}
+h3 {
+  font-size: var(--step-12);
+  font-weight: bolder;
+}
+p {
+  font-size: var(--step-11);
+}
+.tiny {
+  font-size: var(--step--10);
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

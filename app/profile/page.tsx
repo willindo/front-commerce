@@ -1,7 +1,8 @@
+" use client ";
 // frontend/pages/profile.tsx
 import { useEffect } from "react";
 import Nav from "../../components/Nav";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 export default function ProfilePage() {

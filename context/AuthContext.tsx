@@ -1,7 +1,8 @@
+"use client";
 // frontend/context/AuthContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { User, loginUser, registerUser, fetchProfile } from "../lib/api";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 
 type AuthContextValue = {
   user: User | null;
@@ -22,6 +23,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   // hydrate from localStorage (temporary session approach)
   useEffect(() => {
@@ -65,7 +67,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const logout = () => {
     saveUser(null);
     // If backend supports logout endpoint, call it here.
-    Router.push("/login");
+    router.push("/login");
   };
 
   return (

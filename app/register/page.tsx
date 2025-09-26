@@ -1,8 +1,9 @@
+"use client";
 // frontend/pages/register.tsx
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/AuthContext";
 import Nav from "../../components/Nav";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type Form = { email: string; password: string; name?: string };
 
