@@ -1,8 +1,8 @@
 "use client";
-// frontend/context/AuthContext.tsx
+
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { User, loginUser, registerUser, fetchProfile } from "../lib/api";
-import { useRouter } from "next/navigation";
+import { User } from "../lib/types/user";
+import { loginUser, registerUser, fetchProfile } from "../lib/api";
 
 type AuthContextValue = {
   user: User | null;
@@ -18,30 +18,28 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
-  // hydrate from localStorage (temporary session approach)
+  // Load profile on mount
   useEffect(() => {
-    const raw = localStorage.getItem("mono:user");
-    if (raw) {
+    const loadProfile = async () => {
       try {
-        setUser(JSON.parse(raw));
-      } catch {
-        localStorage.removeItem("mono:user");
+        const profile = await fetchProfile();
+        setUser(profile);
+      } catch (err) {
+        setUser(null);
+      } finally {
+        setLoading(false);
       }
-    }
-    setLoading(false);
+    };
+    loadProfile();
   }, []);
 
-  const saveUser = (u: User | null) => {
-    setUser(u);
-    if (u) localStorage.setItem("mono:user", JSON.stringify(u));
-    else localStorage.removeItem("mono:user");
+  const saveUser = (user: User) => {
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   const register = async (data: {
@@ -49,25 +47,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     password: string;
     name?: string;
   }) => {
-    const result = await registerUser(data);
-    // backend might return user or {user, message}
-    const returnedUser: User = result.user ?? result;
+    const returnedUser = await registerUser(data);
     saveUser(returnedUser);
     return returnedUser;
   };
 
   const login = async (data: { email: string; password: string }) => {
     const result = await loginUser(data);
-    // backend may return { message, user } or user directly
-    const returnedUser: User = result.user ?? result;
-    saveUser(returnedUser);
-    return returnedUser;
+    saveUser(result.user);
+    return result.user;
   };
 
   const logout = () => {
-    saveUser(null);
-    // If backend supports logout endpoint, call it here.
-    router.push("/login");
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
   return (
@@ -79,6 +72,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
+  if (!ctx) {
+    throw new Error("useAuth must be used within AuthProvider");
+  }
   return ctx;
 };
