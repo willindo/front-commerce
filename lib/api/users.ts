@@ -19,7 +19,9 @@ export async function fetchUsers(
   });
   if (role) params.append("role", role);
 
-  const res = await fetch(`http://localhost:3001/users?${params.toString()}`);
+  const res = await fetch(
+    `https://backnest-vpjt.onrender.com/users?${params.toString()}`
+  );
   if (!res.ok) throw new Error("Failed to fetch users");
   return res.json();
 }
