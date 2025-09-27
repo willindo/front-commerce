@@ -8,7 +8,7 @@ export default function NewProductPage() {
   const { mutateAsync, isPending } = useCreateProduct();
 
   async function handleCreate(data: any) {
-    await mutateAsync(data);
+    await mutateAsync({ ...data });
     router.push("/products");
   }
 
