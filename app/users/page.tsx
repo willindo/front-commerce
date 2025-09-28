@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchUsers } from "@/lib/api/users";
 import UserTable from "./components/UserTable";
 import UserFilters from "./components/UserFilters";
-import { Role } from "@/lib/types/user";
+import { Role } from "@/lib/types/users";
 
 export default function UsersPage() {
   const [page, setPage] = useState(1);

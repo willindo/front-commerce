@@ -1,4 +1,4 @@
-import { User } from "@/lib/types/user";
+import { User } from "@/lib/types/users";
 
 export default function UserTable({ users }: { users: User[] }) {
   return (

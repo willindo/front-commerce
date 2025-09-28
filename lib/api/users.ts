@@ -1,5 +1,5 @@
 // lib/api/users.ts
-import { User, Role } from "../types/user";
+import { User, Role } from "../types/users";
 
 export type PaginatedUsers = {
   data: User[];

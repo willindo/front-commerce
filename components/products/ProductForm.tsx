@@ -28,13 +28,13 @@ export default function ProductForm({
       />
       <input
         type="number"
-        {...register("price")}
+        {...register("price", { valueAsNumber: true })}
         placeholder="Price"
         className="border p-2 w-full"
       />
       <input
         type="number"
-        {...register("stock")}
+        {...register("stock", { valueAsNumber: true })}
         placeholder="Stock"
         className="border p-2 w-full"
       />
