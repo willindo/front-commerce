@@ -22,6 +22,11 @@ export default function ProductForm({
         className="border p-2 w-full"
       />
       <input
+        {...register("slug")}
+        placeholder="Slug"
+        className="border p-2 w-full"
+      />
+      <input
         {...register("sku")}
         placeholder="SKU"
         className="border p-2 w-full"
