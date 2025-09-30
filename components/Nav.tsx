@@ -11,7 +11,18 @@ export default function Nav() {
         <Link href="/">mono-commerce</Link>
       </div>
       <div className="space-x-4">
-        <Link href="/products">Products</Link>
+        <Link href="/products" className="hover:underline">
+          Products
+        </Link>
+        <Link href="/cart" className="hover:underline">
+          Cart
+        </Link>
+        <Link href="/checkout" className="hover:underline">
+          Checkout
+        </Link>
+        <Link href="/orders" className="hover:underline">
+          Orders
+        </Link>
         {user ? (
           <>
             <Link href="/profile">Profile</Link>
@@ -24,8 +35,8 @@ export default function Nav() {
           </>
         ) : (
           <>
-            <Link href="/login">Login</Link>
-            <Link href="/register">Register</Link>
+            <Link href="/auth/login">Login</Link>
+            <Link href="/auth/register">Register</Link>
           </>
         )}
       </div>

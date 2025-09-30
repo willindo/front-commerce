@@ -42,7 +42,9 @@ docker compose up -d payment-db payment-pgadmin
    -type f  -exec sh -c 'echo "==== {} ===="; cat "{}"; echo' \;
 
 // tree -I 'node_modules|dist|.next|*.tsbuildinfo|*.log' -a ~/dev/payment/apps/api
+// 
 
+/home/badsha/dev/front-commerce
 find ~/dev/payment -type f \( -name "*.controller.ts" -o -name "*.service.ts" -o -name "*.module.ts" \) \
   -exec sh -c 'echo "==== {} ===="; cat "{}"; echo' \;
   
