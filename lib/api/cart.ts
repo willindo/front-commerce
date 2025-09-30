@@ -13,8 +13,10 @@ export async function addToCart(data: AddToCartInput): Promise<Cart> {
   return res.data;
 }
 
-export async function updateCartItem(data: UpdateCartItemInput): Promise<Cart> {
-  const { itemId, quantity } = data;
+export async function updateCartItem({
+  itemId,
+  quantity,
+}: UpdateCartItemInput): Promise<Cart> {
   const res = await api.put<Cart>(`/cart/item/${itemId}`, { quantity });
   return res.data;
 }
