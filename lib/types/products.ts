@@ -1,30 +1,23 @@
-// apps/frontend/types/product.ts
+// lib/types/products.ts
+import { z } from "zod";
+import {
+  ProductModelSchema,
+  ProductCreateInputObjectSchema,
+  ProductUpdateInputObjectSchema,
+} from "@/src/generated/zod/schemas";
 
-// What backend returns
-export type ProductResponseDto = {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  price: number;
-  stock: number;
-  sku: string;
-  currency: string;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
-};
+// DTOs matching NestJS Zod validation
+export const CreateProductDto = ProductCreateInputObjectSchema;
+export type CreateProductDto = z.infer<typeof CreateProductDto>;
 
-// What frontend sends
-export type CreateProductDto = {
-  name: string;
-  slug: string;
-  description?: string;
-  price: number;
-  stock: number;
-  sku: string;
-  currency: string;
-  images?: string[];
-};
+export const UpdateProductDto = ProductUpdateInputObjectSchema;
+export type UpdateProductDto = z.infer<typeof UpdateProductDto>;
 
-export type UpdateProductDto = Partial<CreateProductDto>;
+export const ProductResponseDto = ProductModelSchema;
+export type ProductResponseDto = z.infer<typeof ProductResponseDto>;
+
+// For paginated response
+export interface PaginatedProducts {
+  data: ProductResponseDto[];
+  total: number;
+}

@@ -1,42 +1,48 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { fetchOrders } from "@/lib/api/orders";
+import { useEffect, useState } from "react";
+
+type OrderItem = {
+  productId: string;
+  quantity: number;
+  priceAtPurchase: number;
+};
+type Order = { id: string; total: number; status: string; items: OrderItem[] };
 
 export default function OrdersPage() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["orders"],
-    queryFn: fetchOrders,
-  });
+  const userId = "demo-user-id"; // Replace with auth context
+  const [orders, setOrders] = useState<Order[]>([]);
 
-  if (isLoading) return <div>Loading orders...</div>;
-  if (isError || !data) return <div>Error loading orders</div>;
+  useEffect(() => {
+    fetch("http://localhost:3001/orders")
+      .then((res) => res.json())
+      .then((data) => setOrders(data));
+  }, []);
+
+  if (orders.length === 0) return <p>No orders yet.</p>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">My Orders</h1>
-      <ul className="space-y-3">
-        {data.map((order) => (
-          <li
-            key={order.id}
-            className="border p-4 rounded shadow-sm bg-white"
-          >
-            <p>
-              <span className="font-semibold">Order ID:</span> {order.id}
-            </p>
-            <p>
-              <span className="font-semibold">Total:</span> ₹
-              {(order.total / 100).toFixed(2)}
-            </p>
-            <p>
-              <span className="font-semibold">Status:</span> {order.status}
-            </p>
-            <p className="text-sm text-gray-500">
-              Placed: {new Date(order.createdAt).toLocaleString()}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div className="p-6 space-y-4">
+      <h1 className="text-2xl font-bold mb-4">Your Orders</h1>
+      {orders.map((o) => (
+        <div key={o.id} className="border p-4 rounded space-y-2">
+          <div className="flex justify-between">
+            <div>Order ID: {o.id}</div>
+            <div>Status: {o.status}</div>
+          </div>
+          <div>Total: ${o.total}</div>
+          <div className="mt-2">
+            {o.items.map((it) => (
+              <div key={it.productId} className="flex justify-between">
+                <div>Product: {it.productId}</div>
+                <div>
+                  {it.quantity} × ${it.priceAtPurchase}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
