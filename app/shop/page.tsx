@@ -1,31 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "@/components/shop/ProductCard";
 import Filters from "@/components/shop/Filters";
 
-// Mock data for now – replace with useProducts() hook later
-const mockProducts = [
-  {
-    id: "1",
-    name: "Men's T-Shirt",
-    price: 19.99,
-    images: ["/shirt1.jpg"],
-    gender: "MENS",
-    category: { name: "Tshirts" },
-  },
-  {
-    id: "2",
-    name: "Women's T-Shirt",
-    price: 22.99,
-    images: ["/shirt2.jpg"],
-    gender: "WOMENS",
-    category: { name: "Tshirts" },
-  },
-];
-
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  stock: number;
+};
 export default function ShopPage() {
-  const [page, setPage] = useState(0);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    fetch("http://localhost:3001/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data.data || []));
+  }, []);
 
   return (
     <div className="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -46,8 +38,8 @@ export default function ShopPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((p) => (
+            <ProductCard key={p.id} product={p} />
           ))}
         </div>
 
