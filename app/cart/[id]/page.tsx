@@ -1,39 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  getCart,
-  updateCartItem,
-  removeCartItem,
-  clearCart,
-  Cart,
-} from "@/lib/api/cart";
+import { getCart, updateCartItem, removeCartItem, Cart } from "@/lib/api/cart";
 import Link from "next/link";
 
-export default function CartPage() {
+export default function CartPage({ params }: { params: { cartId: string } }) {
+  const { cartId } = params;
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getCart()
+    getCart(cartId)
       .then(setCart)
       .finally(() => setLoading(false));
-  }, []);
+  }, [cartId]);
 
   async function handleQuantityChange(itemId: string, quantity: number) {
-    if (quantity < 1) return;
-    const updated = await updateCartItem(itemId, quantity);
-    setCart(updated);
+    if (!cart) return;
+    const updated = await updateCartItem(cart.id, itemId, quantity);
+    setCart({ ...cart, items: updated.items });
   }
 
   async function handleRemove(itemId: string) {
-    const updated = await removeCartItem(itemId);
-    setCart(updated);
-  }
-
-  async function handleClear() {
-    const updated = await clearCart();
-    setCart(updated);
+    if (!cart) return;
+    const updated = await removeCartItem(cart.id, itemId);
+    setCart({ ...cart, items: updated.items });
   }
 
   if (loading) return <p className="p-4">Loading cart...</p>;
@@ -41,7 +32,7 @@ export default function CartPage() {
     return <p className="p-4">Your cart is empty.</p>;
 
   const subtotal = cart.items.reduce(
-    (sum, item) => sum + (item.price || 0) * item.quantity,
+    (sum, item) => sum + item.price * item.quantity,
     0
   );
 
@@ -96,20 +87,12 @@ export default function CartPage() {
         <span>Subtotal</span>
         <span>₹{subtotal.toFixed(2)}</span>
       </div>
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={handleClear}
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-        >
-          Clear Cart
-        </button>
-        <Link
-          href={`/checkout?cartId=${cart.id}`}
-          className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
-        >
-          Proceed to Checkout
-        </Link>
-      </div>
+      <Link
+        href={`/checkout?cartId=${cart.id}`}
+        className="mt-6 block bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700"
+      >
+        Proceed to Checkout
+      </Link>
     </div>
   );
 }

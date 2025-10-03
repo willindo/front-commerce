@@ -1,5 +1,13 @@
 // lib/types/products.ts
 import { z } from "zod";
+export type Product = {
+  id: string;
+  name: string;
+  price: number;
+  stock: number;
+  images?: string[];
+};
+
 import {
   ProductModelSchema,
   ProductCreateInputObjectSchema,
