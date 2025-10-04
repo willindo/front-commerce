@@ -6,28 +6,28 @@ export function useCart() {
   const queryClient = useQueryClient();
 
   // ✅ Query
-  const cartQuery = useQuery<CartItem>({
+  const cartQuery = useQuery<Cart>({
     queryKey: ["cart"],
     staleTime: 1000 * 60, // 1 min cache
   });
 
   // ✅ Mutations
-  const addMutation = useMutation<CartItem, Error, AddToCartInput>({
+  const addMutation = useMutation<Cart, Error, AddToCartInput>({
     // mutationFn: addToCart,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
 
-  const updateMutation = useMutation<CartItem, Error, UpdateCartItemInput>({
+  const updateMutation = useMutation<Cart, Error, UpdateCartItemInput>({
     // mutationFn: updateCartItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
 
-  const removeMutation = useMutation<CartItem, Error, string>({
-    mutationFn: removeCartItem,
+  const removeMutation = useMutation<Cart, Error, string>({
+    // mutationFn: removeCartItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },

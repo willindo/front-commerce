@@ -106,13 +106,13 @@ export default function CartTestPage() {
             <div>
               <button
                 className=" m-2.5 bg-blue-500 "
-                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                // onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
               >
                 ➕
               </button>
               <button
                 className=" m-2.5 bg-amber-600"
-                onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                // onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
               >
                 ➖
               </button>
