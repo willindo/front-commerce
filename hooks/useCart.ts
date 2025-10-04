@@ -1,38 +1,32 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  fetchCart,
-  addToCart,
-  updateCartItem,
-  removeCartItem,
-} from "@/lib/api/cart";
-import type { Cart } from "@/lib/types/cart";
+import { addToCart, updateCartItem, removeCartItem } from "@/lib/api/cart";
+import type { Cart, CartItem } from "@/lib/types/cart";
 import { AddToCartInput, UpdateCartItemInput } from "@/lib/schemas/cart";
 export function useCart() {
   const queryClient = useQueryClient();
 
   // ✅ Query
-  const cartQuery = useQuery<Cart>({
+  const cartQuery = useQuery<CartItem>({
     queryKey: ["cart"],
-    queryFn: fetchCart,
     staleTime: 1000 * 60, // 1 min cache
   });
 
   // ✅ Mutations
-  const addMutation = useMutation<Cart, Error, AddToCartInput>({
-    mutationFn: addToCart,
+  const addMutation = useMutation<CartItem, Error, AddToCartInput>({
+    // mutationFn: addToCart,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
 
-  const updateMutation = useMutation<Cart, Error, UpdateCartItemInput>({
-    mutationFn: updateCartItem,
+  const updateMutation = useMutation<CartItem, Error, UpdateCartItemInput>({
+    // mutationFn: updateCartItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
   });
 
-  const removeMutation = useMutation<Cart, Error, string>({
+  const removeMutation = useMutation<CartItem, Error, string>({
     mutationFn: removeCartItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });

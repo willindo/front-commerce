@@ -2,8 +2,8 @@ import { ProductResponseDto } from "./products";
 
 export type CartItem = {
   id: string; // cart item id
-  productId: string;
-  quantity: number;
+  productId?: string;
+  quantity?: number;
   product?: ProductResponseDto; // optional populated product
 };
 
