@@ -41,7 +41,7 @@ export default function CartPage() {
     return <p className="p-4">Your cart is empty.</p>;
 
   const subtotal = cart.items.reduce(
-    (sum, item) => sum + (item.price || 0) * item.quantity,
+    (sum, item) => sum + (item.product.price || 0) * item.quantity,
     0
   );
 
@@ -55,16 +55,16 @@ export default function CartPage() {
             className="flex items-center justify-between border-b pb-2"
           >
             <div className="flex items-center space-x-4">
-              {item.imageUrl && (
+              {item.product.image && (
                 <img
-                  src={item.imageUrl}
-                  alt={item.name}
+                  src={item.product.image}
+                  alt={item.product.name}
                   className="w-16 h-16 object-cover rounded"
                 />
               )}
               <div>
-                <p className="font-medium">{item.name}</p>
-                <p className="text-sm text-gray-500">₹{item.price}</p>
+                <p className="font-medium">{item.product.name}</p>
+                <p className="text-sm text-gray-500">₹{item.product.price}</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">

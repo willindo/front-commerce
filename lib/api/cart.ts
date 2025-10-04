@@ -1,16 +1,21 @@
 export type CartItem = {
   id: string;
   productId: string;
-  name: string;
-  price: number;
   quantity: number;
-  imageUrl?: string;
+  product: {
+    name: string;
+    price: number;
+    description?: string | null;
+    image?: string | null;
+  };
 };
 
 export type Cart = {
   id: string;
   userId: string;
   items: CartItem[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -66,4 +71,3 @@ export async function clearCart(): Promise<Cart> {
   if (!res.ok) throw new Error("Failed to clear cart");
   return res.json();
 }
-
