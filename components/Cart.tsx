@@ -38,13 +38,13 @@ export default function Cart() {
           </li>
         ))}
       </ul>
-      <p>
+      {/* <p>
         Total: ₹
         {cart.items.reduce(
           (sum: number, i) => sum + (i.product?.price || 0) * i.quantity,
           0
         )}
-      </p>
+      </p> */}
     </div>
   );
 }
