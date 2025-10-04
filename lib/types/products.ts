@@ -12,7 +12,7 @@ import {
   ProductModelSchema,
   ProductCreateInputObjectSchema,
   ProductUpdateInputObjectSchema,
-} from "@/src/generated/zod/schemas";
+} from "../../src/generated/zod/schemas";
 
 // DTOs matching NestJS Zod validation
 export const CreateProductDto = ProductCreateInputObjectSchema;
