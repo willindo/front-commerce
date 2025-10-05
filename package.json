@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "build": "npm run sync:zod && next build",
-    "sync:zod": "node ../mono-commerce/scripts/sync-types.js",
+    "sync:zod": "node ./scripts/sync-types.js",
     "prebuild": "npm run ensure:zod",
     "ensure:zod": "if [ ! -d src/generated/zod ]; then echo 'Generating missing Zod schemas...' && npm run fetch:zod; fi",
     "fetch:zod": "echo '❌ (optional) Implement fetch from backend repo or run prisma:generate in monorepo'"
