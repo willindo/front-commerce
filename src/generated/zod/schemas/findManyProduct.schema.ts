@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import * as z from 'zod';
 import { ProductIncludeObjectSchema as ProductIncludeObjectSchema } from './objects/ProductInclude.schema';
 import { ProductOrderByWithRelationInputObjectSchema as ProductOrderByWithRelationInputObjectSchema } from './objects/ProductOrderByWithRelationInput.schema';
@@ -9,7 +8,7 @@ import { ProductScalarFieldEnumSchema } from './enums/ProductScalarFieldEnum.sch
 // Select schema needs to be in file to prevent circular imports
 //------------------------------------------------------
 
-export const ProductFindManySelectSchema: z.ZodType<Prisma.ProductSelect> = z.object({
+export const ProductFindManySelectSchema: z.ZodType<any> = z.object({
     id: z.boolean().optional(),
     name: z.boolean().optional(),
     description: z.boolean().optional(),
@@ -26,7 +25,7 @@ export const ProductFindManySelectSchema: z.ZodType<Prisma.ProductSelect> = z.ob
     wishlistItems: z.boolean().optional(),
     orderItems: z.boolean().optional(),
     _count: z.boolean().optional()
-  }).strict() as unknown as z.ZodType<Prisma.ProductSelect>;
+  }).strict() as unknown as z.ZodType<any>;
 
 export const ProductFindManySelectZodSchema = z.object({
     id: z.boolean().optional(),
@@ -47,6 +46,6 @@ export const ProductFindManySelectZodSchema = z.object({
     _count: z.boolean().optional()
   }).strict();
 
-export const ProductFindManySchema: z.ZodType<Prisma.ProductFindManyArgs> = z.object({ select: ProductFindManySelectSchema.optional(), include: z.lazy(() => ProductIncludeObjectSchema.optional()), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<Prisma.ProductFindManyArgs>;
+export const ProductFindManySchema: z.ZodType<any> = z.object({ select: ProductFindManySelectSchema.optional(), include: z.lazy(() => ProductIncludeObjectSchema.optional()), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
 export const ProductFindManyZodSchema = z.object({ select: ProductFindManySelectSchema.optional(), include: z.lazy(() => ProductIncludeObjectSchema.optional()), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict();

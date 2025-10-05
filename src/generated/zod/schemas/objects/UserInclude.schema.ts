@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { CartFindManySchema as CartFindManySchema } from '../findManyCart.schema';
 import { OrderFindManySchema as OrderFindManySchema } from '../findManyOrder.schema';
 import { WishlistFindManySchema as WishlistFindManySchema } from '../findManyWishlist.schema';
@@ -11,5 +10,5 @@ const makeSchema = () => z.object({
   wishlists: z.union([z.boolean(), z.lazy(() => WishlistFindManySchema)]).optional(),
   _count: z.union([z.boolean(), z.lazy(() => UserCountOutputTypeArgsObjectSchema)]).optional()
 }).strict();
-export const UserIncludeObjectSchema: z.ZodType<Prisma.UserInclude> = makeSchema() as unknown as z.ZodType<Prisma.UserInclude>;
+export const UserIncludeObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const UserIncludeObjectZodSchema = makeSchema();

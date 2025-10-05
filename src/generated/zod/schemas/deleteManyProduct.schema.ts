@@ -1,7 +1,6 @@
-import type { Prisma } from '@prisma/client';
 import * as z from 'zod';
 import { ProductWhereInputObjectSchema as ProductWhereInputObjectSchema } from './objects/ProductWhereInput.schema';
 
-export const ProductDeleteManySchema: z.ZodType<Prisma.ProductDeleteManyArgs> = z.object({ where: ProductWhereInputObjectSchema.optional() }).strict() as unknown as z.ZodType<Prisma.ProductDeleteManyArgs>;
+export const ProductDeleteManySchema: z.ZodType<any> = z.object({ where: ProductWhereInputObjectSchema.optional() }).strict() as unknown as z.ZodType<any>;
 
 export const ProductDeleteManyZodSchema = z.object({ where: ProductWhereInputObjectSchema.optional() }).strict();

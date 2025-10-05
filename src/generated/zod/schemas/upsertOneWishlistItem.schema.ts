@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import * as z from 'zod';
 import { WishlistItemSelectObjectSchema as WishlistItemSelectObjectSchema } from './objects/WishlistItemSelect.schema';
 import { WishlistItemIncludeObjectSchema as WishlistItemIncludeObjectSchema } from './objects/WishlistItemInclude.schema';
@@ -8,6 +7,6 @@ import { WishlistItemUncheckedCreateInputObjectSchema as WishlistItemUncheckedCr
 import { WishlistItemUpdateInputObjectSchema as WishlistItemUpdateInputObjectSchema } from './objects/WishlistItemUpdateInput.schema';
 import { WishlistItemUncheckedUpdateInputObjectSchema as WishlistItemUncheckedUpdateInputObjectSchema } from './objects/WishlistItemUncheckedUpdateInput.schema';
 
-export const WishlistItemUpsertOneSchema: z.ZodType<Prisma.WishlistItemUpsertArgs> = z.object({ select: WishlistItemSelectObjectSchema.optional(), include: WishlistItemIncludeObjectSchema.optional(), where: WishlistItemWhereUniqueInputObjectSchema, create: z.union([ WishlistItemCreateInputObjectSchema, WishlistItemUncheckedCreateInputObjectSchema ]), update: z.union([ WishlistItemUpdateInputObjectSchema, WishlistItemUncheckedUpdateInputObjectSchema ]) }).strict() as unknown as z.ZodType<Prisma.WishlistItemUpsertArgs>;
+export const WishlistItemUpsertOneSchema: z.ZodType<any> = z.object({ select: WishlistItemSelectObjectSchema.optional(), include: WishlistItemIncludeObjectSchema.optional(), where: WishlistItemWhereUniqueInputObjectSchema, create: z.union([ WishlistItemCreateInputObjectSchema, WishlistItemUncheckedCreateInputObjectSchema ]), update: z.union([ WishlistItemUpdateInputObjectSchema, WishlistItemUncheckedUpdateInputObjectSchema ]) }).strict() as unknown as z.ZodType<any>;
 
 export const WishlistItemUpsertOneZodSchema = z.object({ select: WishlistItemSelectObjectSchema.optional(), include: WishlistItemIncludeObjectSchema.optional(), where: WishlistItemWhereUniqueInputObjectSchema, create: z.union([ WishlistItemCreateInputObjectSchema, WishlistItemUncheckedCreateInputObjectSchema ]), update: z.union([ WishlistItemUpdateInputObjectSchema, WishlistItemUncheckedUpdateInputObjectSchema ]) }).strict();

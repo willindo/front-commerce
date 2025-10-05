@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFieldUpdateOperationsInputObjectSchema as StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
 import { IntFieldUpdateOperationsInputObjectSchema as IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { FloatFieldUpdateOperationsInputObjectSchema as FloatFieldUpdateOperationsInputObjectSchema } from './FloatFieldUpdateOperationsInput.schema'
@@ -11,5 +10,5 @@ const makeSchema = () => z.object({
   quantity: z.union([z.number().int(), z.lazy(() => IntFieldUpdateOperationsInputObjectSchema)]).optional(),
   priceAtPurchase: z.union([z.number(), z.lazy(() => FloatFieldUpdateOperationsInputObjectSchema)]).optional()
 }).strict();
-export const OrderItemUncheckedUpdateManyInputObjectSchema: z.ZodType<Prisma.OrderItemUncheckedUpdateManyInput> = makeSchema() as unknown as z.ZodType<Prisma.OrderItemUncheckedUpdateManyInput>;
+export const OrderItemUncheckedUpdateManyInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const OrderItemUncheckedUpdateManyInputObjectZodSchema = makeSchema();

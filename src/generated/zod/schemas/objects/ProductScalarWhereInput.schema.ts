@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { StringNullableFilterObjectSchema as StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
 import { FloatFilterObjectSchema as FloatFilterObjectSchema } from './FloatFilter.schema';
@@ -24,5 +23,5 @@ const productscalarwhereinputSchema = z.object({
   createdAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
   updatedAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional()
 }).strict();
-export const ProductScalarWhereInputObjectSchema: z.ZodType<Prisma.ProductScalarWhereInput> = productscalarwhereinputSchema as unknown as z.ZodType<Prisma.ProductScalarWhereInput>;
+export const ProductScalarWhereInputObjectSchema: z.ZodType<any> = productscalarwhereinputSchema as unknown as z.ZodType<any>;
 export const ProductScalarWhereInputObjectZodSchema = productscalarwhereinputSchema;

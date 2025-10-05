@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { SortOrderSchema } from '../enums/SortOrder.schema';
 import { SortOrderInputObjectSchema as SortOrderInputObjectSchema } from './SortOrderInput.schema';
 import { CategoryOrderByWithRelationInputObjectSchema as CategoryOrderByWithRelationInputObjectSchema } from './CategoryOrderByWithRelationInput.schema';
@@ -25,5 +24,5 @@ const makeSchema = () => z.object({
   wishlistItems: z.lazy(() => WishlistItemOrderByRelationAggregateInputObjectSchema).optional(),
   orderItems: z.lazy(() => OrderItemOrderByRelationAggregateInputObjectSchema).optional()
 }).strict();
-export const ProductOrderByWithRelationInputObjectSchema: z.ZodType<Prisma.ProductOrderByWithRelationInput> = makeSchema() as unknown as z.ZodType<Prisma.ProductOrderByWithRelationInput>;
+export const ProductOrderByWithRelationInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const ProductOrderByWithRelationInputObjectZodSchema = makeSchema();

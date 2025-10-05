@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 
 
 const makeSchema = () => z.object({
@@ -9,5 +8,5 @@ const makeSchema = () => z.object({
   multiply: z.number().int().optional(),
   divide: z.number().int().optional()
 }).strict();
-export const IntFieldUpdateOperationsInputObjectSchema: z.ZodType<Prisma.IntFieldUpdateOperationsInput> = makeSchema() as unknown as z.ZodType<Prisma.IntFieldUpdateOperationsInput>;
+export const IntFieldUpdateOperationsInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const IntFieldUpdateOperationsInputObjectZodSchema = makeSchema();

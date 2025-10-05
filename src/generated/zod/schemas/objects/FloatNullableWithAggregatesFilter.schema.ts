@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { NestedFloatNullableWithAggregatesFilterObjectSchema as NestedFloatNullableWithAggregatesFilterObjectSchema } from './NestedFloatNullableWithAggregatesFilter.schema';
 import { NestedIntNullableFilterObjectSchema as NestedIntNullableFilterObjectSchema } from './NestedIntNullableFilter.schema';
 import { NestedFloatNullableFilterObjectSchema as NestedFloatNullableFilterObjectSchema } from './NestedFloatNullableFilter.schema'
@@ -19,5 +18,5 @@ const makeSchema = () => z.object({
   _min: z.lazy(() => NestedFloatNullableFilterObjectSchema).optional(),
   _max: z.lazy(() => NestedFloatNullableFilterObjectSchema).optional()
 }).strict();
-export const FloatNullableWithAggregatesFilterObjectSchema: z.ZodType<Prisma.FloatNullableWithAggregatesFilter> = makeSchema() as unknown as z.ZodType<Prisma.FloatNullableWithAggregatesFilter>;
+export const FloatNullableWithAggregatesFilterObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const FloatNullableWithAggregatesFilterObjectZodSchema = makeSchema();

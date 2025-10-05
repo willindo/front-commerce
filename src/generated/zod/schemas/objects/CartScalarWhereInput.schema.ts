@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { DateTimeFilterObjectSchema as DateTimeFilterObjectSchema } from './DateTimeFilter.schema'
 
@@ -12,5 +11,5 @@ const cartscalarwhereinputSchema = z.object({
   createdAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
   updatedAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional()
 }).strict();
-export const CartScalarWhereInputObjectSchema: z.ZodType<Prisma.CartScalarWhereInput> = cartscalarwhereinputSchema as unknown as z.ZodType<Prisma.CartScalarWhereInput>;
+export const CartScalarWhereInputObjectSchema: z.ZodType<any> = cartscalarwhereinputSchema as unknown as z.ZodType<any>;
 export const CartScalarWhereInputObjectZodSchema = cartscalarwhereinputSchema;

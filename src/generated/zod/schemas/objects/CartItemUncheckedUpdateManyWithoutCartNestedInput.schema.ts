@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { CartItemCreateWithoutCartInputObjectSchema as CartItemCreateWithoutCartInputObjectSchema } from './CartItemCreateWithoutCartInput.schema';
 import { CartItemUncheckedCreateWithoutCartInputObjectSchema as CartItemUncheckedCreateWithoutCartInputObjectSchema } from './CartItemUncheckedCreateWithoutCartInput.schema';
 import { CartItemCreateOrConnectWithoutCartInputObjectSchema as CartItemCreateOrConnectWithoutCartInputObjectSchema } from './CartItemCreateOrConnectWithoutCartInput.schema';
@@ -23,5 +22,5 @@ const makeSchema = () => z.object({
   updateMany: z.union([z.lazy(() => CartItemUpdateManyWithWhereWithoutCartInputObjectSchema), z.lazy(() => CartItemUpdateManyWithWhereWithoutCartInputObjectSchema).array()]).optional(),
   deleteMany: z.union([z.lazy(() => CartItemScalarWhereInputObjectSchema), z.lazy(() => CartItemScalarWhereInputObjectSchema).array()]).optional()
 }).strict();
-export const CartItemUncheckedUpdateManyWithoutCartNestedInputObjectSchema: z.ZodType<Prisma.CartItemUncheckedUpdateManyWithoutCartNestedInput> = makeSchema() as unknown as z.ZodType<Prisma.CartItemUncheckedUpdateManyWithoutCartNestedInput>;
+export const CartItemUncheckedUpdateManyWithoutCartNestedInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const CartItemUncheckedUpdateManyWithoutCartNestedInputObjectZodSchema = makeSchema();

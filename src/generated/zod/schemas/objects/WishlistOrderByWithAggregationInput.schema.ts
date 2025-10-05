@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { SortOrderSchema } from '../enums/SortOrder.schema';
 import { WishlistCountOrderByAggregateInputObjectSchema as WishlistCountOrderByAggregateInputObjectSchema } from './WishlistCountOrderByAggregateInput.schema';
 import { WishlistMaxOrderByAggregateInputObjectSchema as WishlistMaxOrderByAggregateInputObjectSchema } from './WishlistMaxOrderByAggregateInput.schema';
@@ -13,5 +12,5 @@ const makeSchema = () => z.object({
   _max: z.lazy(() => WishlistMaxOrderByAggregateInputObjectSchema).optional(),
   _min: z.lazy(() => WishlistMinOrderByAggregateInputObjectSchema).optional()
 }).strict();
-export const WishlistOrderByWithAggregationInputObjectSchema: z.ZodType<Prisma.WishlistOrderByWithAggregationInput> = makeSchema() as unknown as z.ZodType<Prisma.WishlistOrderByWithAggregationInput>;
+export const WishlistOrderByWithAggregationInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const WishlistOrderByWithAggregationInputObjectZodSchema = makeSchema();

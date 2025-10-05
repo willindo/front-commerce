@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { FloatFilterObjectSchema as FloatFilterObjectSchema } from './FloatFilter.schema';
 import { EnumOrderStatusFilterObjectSchema as EnumOrderStatusFilterObjectSchema } from './EnumOrderStatusFilter.schema';
@@ -22,5 +21,5 @@ const orderwhereinputSchema = z.object({
   user: z.union([z.lazy(() => UserScalarRelationFilterObjectSchema), z.lazy(() => UserWhereInputObjectSchema)]).optional(),
   items: z.lazy(() => OrderItemListRelationFilterObjectSchema).optional()
 }).strict();
-export const OrderWhereInputObjectSchema: z.ZodType<Prisma.OrderWhereInput> = orderwhereinputSchema as unknown as z.ZodType<Prisma.OrderWhereInput>;
+export const OrderWhereInputObjectSchema: z.ZodType<any> = orderwhereinputSchema as unknown as z.ZodType<any>;
 export const OrderWhereInputObjectZodSchema = orderwhereinputSchema;

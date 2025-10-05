@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { CartWhereInputObjectSchema as CartWhereInputObjectSchema } from './CartWhereInput.schema'
 
 const makeSchema = () => z.object({
@@ -7,5 +6,5 @@ const makeSchema = () => z.object({
   some: z.lazy(() => CartWhereInputObjectSchema).optional(),
   none: z.lazy(() => CartWhereInputObjectSchema).optional()
 }).strict();
-export const CartListRelationFilterObjectSchema: z.ZodType<Prisma.CartListRelationFilter> = makeSchema() as unknown as z.ZodType<Prisma.CartListRelationFilter>;
+export const CartListRelationFilterObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const CartListRelationFilterObjectZodSchema = makeSchema();

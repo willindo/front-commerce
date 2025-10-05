@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import * as z from 'zod';
 import { ProductSelectObjectSchema as ProductSelectObjectSchema } from './objects/ProductSelect.schema';
 import { ProductIncludeObjectSchema as ProductIncludeObjectSchema } from './objects/ProductInclude.schema';
@@ -8,6 +7,6 @@ import { ProductUncheckedCreateInputObjectSchema as ProductUncheckedCreateInputO
 import { ProductUpdateInputObjectSchema as ProductUpdateInputObjectSchema } from './objects/ProductUpdateInput.schema';
 import { ProductUncheckedUpdateInputObjectSchema as ProductUncheckedUpdateInputObjectSchema } from './objects/ProductUncheckedUpdateInput.schema';
 
-export const ProductUpsertOneSchema: z.ZodType<Prisma.ProductUpsertArgs> = z.object({ select: ProductSelectObjectSchema.optional(), include: ProductIncludeObjectSchema.optional(), where: ProductWhereUniqueInputObjectSchema, create: z.union([ ProductCreateInputObjectSchema, ProductUncheckedCreateInputObjectSchema ]), update: z.union([ ProductUpdateInputObjectSchema, ProductUncheckedUpdateInputObjectSchema ]) }).strict() as unknown as z.ZodType<Prisma.ProductUpsertArgs>;
+export const ProductUpsertOneSchema: z.ZodType<any> = z.object({ select: ProductSelectObjectSchema.optional(), include: ProductIncludeObjectSchema.optional(), where: ProductWhereUniqueInputObjectSchema, create: z.union([ ProductCreateInputObjectSchema, ProductUncheckedCreateInputObjectSchema ]), update: z.union([ ProductUpdateInputObjectSchema, ProductUncheckedUpdateInputObjectSchema ]) }).strict() as unknown as z.ZodType<any>;
 
 export const ProductUpsertOneZodSchema = z.object({ select: ProductSelectObjectSchema.optional(), include: ProductIncludeObjectSchema.optional(), where: ProductWhereUniqueInputObjectSchema, create: z.union([ ProductCreateInputObjectSchema, ProductUncheckedCreateInputObjectSchema ]), update: z.union([ ProductUpdateInputObjectSchema, ProductUncheckedUpdateInputObjectSchema ]) }).strict();

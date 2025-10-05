@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 
 
 const makeSchema = () => z.object({
@@ -13,5 +12,5 @@ const makeSchema = () => z.object({
   productDescription: z.literal(true).optional(),
   productImage: z.literal(true).optional()
 }).strict();
-export const CartItemMaxAggregateInputObjectSchema: z.ZodType<Prisma.CartItemMaxAggregateInputType> = makeSchema() as unknown as z.ZodType<Prisma.CartItemMaxAggregateInputType>;
+export const CartItemMaxAggregateInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const CartItemMaxAggregateInputObjectZodSchema = makeSchema();

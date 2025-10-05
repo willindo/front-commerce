@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { ProductCreateWithoutCategoryInputObjectSchema as ProductCreateWithoutCategoryInputObjectSchema } from './ProductCreateWithoutCategoryInput.schema';
 import { ProductUncheckedCreateWithoutCategoryInputObjectSchema as ProductUncheckedCreateWithoutCategoryInputObjectSchema } from './ProductUncheckedCreateWithoutCategoryInput.schema';
 import { ProductCreateOrConnectWithoutCategoryInputObjectSchema as ProductCreateOrConnectWithoutCategoryInputObjectSchema } from './ProductCreateOrConnectWithoutCategoryInput.schema';
@@ -23,5 +22,5 @@ const makeSchema = () => z.object({
   updateMany: z.union([z.lazy(() => ProductUpdateManyWithWhereWithoutCategoryInputObjectSchema), z.lazy(() => ProductUpdateManyWithWhereWithoutCategoryInputObjectSchema).array()]).optional(),
   deleteMany: z.union([z.lazy(() => ProductScalarWhereInputObjectSchema), z.lazy(() => ProductScalarWhereInputObjectSchema).array()]).optional()
 }).strict();
-export const ProductUncheckedUpdateManyWithoutCategoryNestedInputObjectSchema: z.ZodType<Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput> = makeSchema() as unknown as z.ZodType<Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput>;
+export const ProductUncheckedUpdateManyWithoutCategoryNestedInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const ProductUncheckedUpdateManyWithoutCategoryNestedInputObjectZodSchema = makeSchema();

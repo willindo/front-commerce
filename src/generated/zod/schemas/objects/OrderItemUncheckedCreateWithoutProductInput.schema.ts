@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 
 
 const makeSchema = () => z.object({
@@ -8,5 +7,5 @@ const makeSchema = () => z.object({
   quantity: z.number().int(),
   priceAtPurchase: z.number()
 }).strict();
-export const OrderItemUncheckedCreateWithoutProductInputObjectSchema: z.ZodType<Prisma.OrderItemUncheckedCreateWithoutProductInput> = makeSchema() as unknown as z.ZodType<Prisma.OrderItemUncheckedCreateWithoutProductInput>;
+export const OrderItemUncheckedCreateWithoutProductInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const OrderItemUncheckedCreateWithoutProductInputObjectZodSchema = makeSchema();

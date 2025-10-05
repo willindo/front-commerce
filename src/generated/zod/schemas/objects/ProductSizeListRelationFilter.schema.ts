@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { ProductSizeWhereInputObjectSchema as ProductSizeWhereInputObjectSchema } from './ProductSizeWhereInput.schema'
 
 const makeSchema = () => z.object({
@@ -7,5 +6,5 @@ const makeSchema = () => z.object({
   some: z.lazy(() => ProductSizeWhereInputObjectSchema).optional(),
   none: z.lazy(() => ProductSizeWhereInputObjectSchema).optional()
 }).strict();
-export const ProductSizeListRelationFilterObjectSchema: z.ZodType<Prisma.ProductSizeListRelationFilter> = makeSchema() as unknown as z.ZodType<Prisma.ProductSizeListRelationFilter>;
+export const ProductSizeListRelationFilterObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const ProductSizeListRelationFilterObjectZodSchema = makeSchema();

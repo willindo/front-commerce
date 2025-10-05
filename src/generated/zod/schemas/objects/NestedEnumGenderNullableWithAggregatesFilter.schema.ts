@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { GenderSchema } from '../enums/Gender.schema';
 import { NestedIntNullableFilterObjectSchema as NestedIntNullableFilterObjectSchema } from './NestedIntNullableFilter.schema';
 import { NestedEnumGenderNullableFilterObjectSchema as NestedEnumGenderNullableFilterObjectSchema } from './NestedEnumGenderNullableFilter.schema'
@@ -13,5 +12,5 @@ const nestedenumgendernullablewithaggregatesfilterSchema = z.object({
   _min: z.lazy(() => NestedEnumGenderNullableFilterObjectSchema).optional(),
   _max: z.lazy(() => NestedEnumGenderNullableFilterObjectSchema).optional()
 }).strict();
-export const NestedEnumGenderNullableWithAggregatesFilterObjectSchema: z.ZodType<Prisma.NestedEnumGenderNullableWithAggregatesFilter> = nestedenumgendernullablewithaggregatesfilterSchema as unknown as z.ZodType<Prisma.NestedEnumGenderNullableWithAggregatesFilter>;
+export const NestedEnumGenderNullableWithAggregatesFilterObjectSchema: z.ZodType<any> = nestedenumgendernullablewithaggregatesfilterSchema as unknown as z.ZodType<any>;
 export const NestedEnumGenderNullableWithAggregatesFilterObjectZodSchema = nestedenumgendernullablewithaggregatesfilterSchema;

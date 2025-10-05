@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { IntFilterObjectSchema as IntFilterObjectSchema } from './IntFilter.schema';
 import { FloatFilterObjectSchema as FloatFilterObjectSchema } from './FloatFilter.schema'
@@ -14,5 +13,5 @@ const orderitemscalarwhereinputSchema = z.object({
   quantity: z.union([z.lazy(() => IntFilterObjectSchema), z.number().int()]).optional(),
   priceAtPurchase: z.union([z.lazy(() => FloatFilterObjectSchema), z.number()]).optional()
 }).strict();
-export const OrderItemScalarWhereInputObjectSchema: z.ZodType<Prisma.OrderItemScalarWhereInput> = orderitemscalarwhereinputSchema as unknown as z.ZodType<Prisma.OrderItemScalarWhereInput>;
+export const OrderItemScalarWhereInputObjectSchema: z.ZodType<any> = orderitemscalarwhereinputSchema as unknown as z.ZodType<any>;
 export const OrderItemScalarWhereInputObjectZodSchema = orderitemscalarwhereinputSchema;

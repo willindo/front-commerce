@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { RoleSchema } from '../enums/Role.schema';
 import { NestedIntFilterObjectSchema as NestedIntFilterObjectSchema } from './NestedIntFilter.schema';
 import { NestedEnumRoleFilterObjectSchema as NestedEnumRoleFilterObjectSchema } from './NestedEnumRoleFilter.schema'
@@ -13,5 +12,5 @@ const nestedenumrolewithaggregatesfilterSchema = z.object({
   _min: z.lazy(() => NestedEnumRoleFilterObjectSchema).optional(),
   _max: z.lazy(() => NestedEnumRoleFilterObjectSchema).optional()
 }).strict();
-export const NestedEnumRoleWithAggregatesFilterObjectSchema: z.ZodType<Prisma.NestedEnumRoleWithAggregatesFilter> = nestedenumrolewithaggregatesfilterSchema as unknown as z.ZodType<Prisma.NestedEnumRoleWithAggregatesFilter>;
+export const NestedEnumRoleWithAggregatesFilterObjectSchema: z.ZodType<any> = nestedenumrolewithaggregatesfilterSchema as unknown as z.ZodType<any>;
 export const NestedEnumRoleWithAggregatesFilterObjectZodSchema = nestedenumrolewithaggregatesfilterSchema;

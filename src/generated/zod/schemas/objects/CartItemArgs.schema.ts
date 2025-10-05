@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { CartItemSelectObjectSchema as CartItemSelectObjectSchema } from './CartItemSelect.schema';
 import { CartItemIncludeObjectSchema as CartItemIncludeObjectSchema } from './CartItemInclude.schema'
 

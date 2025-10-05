@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { OrderItemCreateWithoutOrderInputObjectSchema as OrderItemCreateWithoutOrderInputObjectSchema } from './OrderItemCreateWithoutOrderInput.schema';
 import { OrderItemUncheckedCreateWithoutOrderInputObjectSchema as OrderItemUncheckedCreateWithoutOrderInputObjectSchema } from './OrderItemUncheckedCreateWithoutOrderInput.schema';
 import { OrderItemCreateOrConnectWithoutOrderInputObjectSchema as OrderItemCreateOrConnectWithoutOrderInputObjectSchema } from './OrderItemCreateOrConnectWithoutOrderInput.schema';
@@ -12,5 +11,5 @@ const makeSchema = () => z.object({
   createMany: z.lazy(() => OrderItemCreateManyOrderInputEnvelopeObjectSchema).optional(),
   connect: z.union([z.lazy(() => OrderItemWhereUniqueInputObjectSchema), z.lazy(() => OrderItemWhereUniqueInputObjectSchema).array()]).optional()
 }).strict();
-export const OrderItemCreateNestedManyWithoutOrderInputObjectSchema: z.ZodType<Prisma.OrderItemCreateNestedManyWithoutOrderInput> = makeSchema() as unknown as z.ZodType<Prisma.OrderItemCreateNestedManyWithoutOrderInput>;
+export const OrderItemCreateNestedManyWithoutOrderInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const OrderItemCreateNestedManyWithoutOrderInputObjectZodSchema = makeSchema();

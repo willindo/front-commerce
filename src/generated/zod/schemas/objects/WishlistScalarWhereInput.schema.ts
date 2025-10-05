@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { DateTimeFilterObjectSchema as DateTimeFilterObjectSchema } from './DateTimeFilter.schema'
 
@@ -11,5 +10,5 @@ const wishlistscalarwhereinputSchema = z.object({
   userId: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
   createdAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional()
 }).strict();
-export const WishlistScalarWhereInputObjectSchema: z.ZodType<Prisma.WishlistScalarWhereInput> = wishlistscalarwhereinputSchema as unknown as z.ZodType<Prisma.WishlistScalarWhereInput>;
+export const WishlistScalarWhereInputObjectSchema: z.ZodType<any> = wishlistscalarwhereinputSchema as unknown as z.ZodType<any>;
 export const WishlistScalarWhereInputObjectZodSchema = wishlistscalarwhereinputSchema;

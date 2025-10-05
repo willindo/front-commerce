@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 
 
 const nestedfloatnullablefilterSchema = z.object({
@@ -12,5 +11,5 @@ const nestedfloatnullablefilterSchema = z.object({
   gte: z.number().optional(),
   not: z.union([z.number(), z.lazy(() => NestedFloatNullableFilterObjectSchema)]).optional().nullable()
 }).strict();
-export const NestedFloatNullableFilterObjectSchema: z.ZodType<Prisma.NestedFloatNullableFilter> = nestedfloatnullablefilterSchema as unknown as z.ZodType<Prisma.NestedFloatNullableFilter>;
+export const NestedFloatNullableFilterObjectSchema: z.ZodType<any> = nestedfloatnullablefilterSchema as unknown as z.ZodType<any>;
 export const NestedFloatNullableFilterObjectZodSchema = nestedfloatnullablefilterSchema;

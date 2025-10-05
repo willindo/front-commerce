@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import * as z from 'zod';
 import { WishlistIncludeObjectSchema as WishlistIncludeObjectSchema } from './objects/WishlistInclude.schema';
 import { WishlistOrderByWithRelationInputObjectSchema as WishlistOrderByWithRelationInputObjectSchema } from './objects/WishlistOrderByWithRelationInput.schema';
@@ -9,14 +8,14 @@ import { WishlistScalarFieldEnumSchema } from './enums/WishlistScalarFieldEnum.s
 // Select schema needs to be in file to prevent circular imports
 //------------------------------------------------------
 
-export const WishlistFindManySelectSchema: z.ZodType<Prisma.WishlistSelect> = z.object({
+export const WishlistFindManySelectSchema: z.ZodType<any> = z.object({
     id: z.boolean().optional(),
     user: z.boolean().optional(),
     userId: z.boolean().optional(),
     items: z.boolean().optional(),
     createdAt: z.boolean().optional(),
     _count: z.boolean().optional()
-  }).strict() as unknown as z.ZodType<Prisma.WishlistSelect>;
+  }).strict() as unknown as z.ZodType<any>;
 
 export const WishlistFindManySelectZodSchema = z.object({
     id: z.boolean().optional(),
@@ -27,6 +26,6 @@ export const WishlistFindManySelectZodSchema = z.object({
     _count: z.boolean().optional()
   }).strict();
 
-export const WishlistFindManySchema: z.ZodType<Prisma.WishlistFindManyArgs> = z.object({ select: WishlistFindManySelectSchema.optional(), include: z.lazy(() => WishlistIncludeObjectSchema.optional()), orderBy: z.union([WishlistOrderByWithRelationInputObjectSchema, WishlistOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistWhereInputObjectSchema.optional(), cursor: WishlistWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistScalarFieldEnumSchema, WishlistScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<Prisma.WishlistFindManyArgs>;
+export const WishlistFindManySchema: z.ZodType<any> = z.object({ select: WishlistFindManySelectSchema.optional(), include: z.lazy(() => WishlistIncludeObjectSchema.optional()), orderBy: z.union([WishlistOrderByWithRelationInputObjectSchema, WishlistOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistWhereInputObjectSchema.optional(), cursor: WishlistWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistScalarFieldEnumSchema, WishlistScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
 export const WishlistFindManyZodSchema = z.object({ select: WishlistFindManySelectSchema.optional(), include: z.lazy(() => WishlistIncludeObjectSchema.optional()), orderBy: z.union([WishlistOrderByWithRelationInputObjectSchema, WishlistOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistWhereInputObjectSchema.optional(), cursor: WishlistWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistScalarFieldEnumSchema, WishlistScalarFieldEnumSchema.array()]).optional() }).strict();

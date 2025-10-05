@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFieldUpdateOperationsInputObjectSchema as StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema'
 
 const makeSchema = () => z.object({
@@ -7,5 +6,5 @@ const makeSchema = () => z.object({
   productId: z.union([z.string(), z.lazy(() => StringFieldUpdateOperationsInputObjectSchema)]).optional(),
   wishlistId: z.union([z.string(), z.lazy(() => StringFieldUpdateOperationsInputObjectSchema)]).optional()
 }).strict();
-export const WishlistItemUncheckedUpdateManyInputObjectSchema: z.ZodType<Prisma.WishlistItemUncheckedUpdateManyInput> = makeSchema() as unknown as z.ZodType<Prisma.WishlistItemUncheckedUpdateManyInput>;
+export const WishlistItemUncheckedUpdateManyInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const WishlistItemUncheckedUpdateManyInputObjectZodSchema = makeSchema();

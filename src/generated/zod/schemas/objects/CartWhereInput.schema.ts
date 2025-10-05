@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { DateTimeFilterObjectSchema as DateTimeFilterObjectSchema } from './DateTimeFilter.schema';
 import { UserScalarRelationFilterObjectSchema as UserScalarRelationFilterObjectSchema } from './UserScalarRelationFilter.schema';
@@ -17,5 +16,5 @@ const cartwhereinputSchema = z.object({
   user: z.union([z.lazy(() => UserScalarRelationFilterObjectSchema), z.lazy(() => UserWhereInputObjectSchema)]).optional(),
   items: z.lazy(() => CartItemListRelationFilterObjectSchema).optional()
 }).strict();
-export const CartWhereInputObjectSchema: z.ZodType<Prisma.CartWhereInput> = cartwhereinputSchema as unknown as z.ZodType<Prisma.CartWhereInput>;
+export const CartWhereInputObjectSchema: z.ZodType<any> = cartwhereinputSchema as unknown as z.ZodType<any>;
 export const CartWhereInputObjectZodSchema = cartwhereinputSchema;

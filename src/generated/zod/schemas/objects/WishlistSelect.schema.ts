@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { UserArgsObjectSchema as UserArgsObjectSchema } from './UserArgs.schema';
 import { WishlistItemFindManySchema as WishlistItemFindManySchema } from '../findManyWishlistItem.schema';
 import { WishlistCountOutputTypeArgsObjectSchema as WishlistCountOutputTypeArgsObjectSchema } from './WishlistCountOutputTypeArgs.schema'
@@ -12,5 +11,5 @@ const makeSchema = () => z.object({
   createdAt: z.boolean().optional(),
   _count: z.union([z.boolean(), z.lazy(() => WishlistCountOutputTypeArgsObjectSchema)]).optional()
 }).strict();
-export const WishlistSelectObjectSchema: z.ZodType<Prisma.WishlistSelect> = makeSchema() as unknown as z.ZodType<Prisma.WishlistSelect>;
+export const WishlistSelectObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const WishlistSelectObjectZodSchema = makeSchema();

@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFieldUpdateOperationsInputObjectSchema as StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
 import { SizeSchema } from '../enums/Size.schema';
 import { NullableEnumSizeFieldUpdateOperationsInputObjectSchema as NullableEnumSizeFieldUpdateOperationsInputObjectSchema } from './NullableEnumSizeFieldUpdateOperationsInput.schema';
@@ -18,5 +17,5 @@ const makeSchema = () => z.object({
   productImage: z.union([z.string(), z.lazy(() => NullableStringFieldUpdateOperationsInputObjectSchema)]).optional().nullable(),
   cart: z.lazy(() => CartUpdateOneRequiredWithoutItemsNestedInputObjectSchema).optional()
 }).strict();
-export const CartItemUpdateWithoutProductInputObjectSchema: z.ZodType<Prisma.CartItemUpdateWithoutProductInput> = makeSchema() as unknown as z.ZodType<Prisma.CartItemUpdateWithoutProductInput>;
+export const CartItemUpdateWithoutProductInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const CartItemUpdateWithoutProductInputObjectZodSchema = makeSchema();

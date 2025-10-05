@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { OrderStatusSchema } from '../enums/OrderStatus.schema';
 import { NestedEnumOrderStatusWithAggregatesFilterObjectSchema as NestedEnumOrderStatusWithAggregatesFilterObjectSchema } from './NestedEnumOrderStatusWithAggregatesFilter.schema';
 import { NestedIntFilterObjectSchema as NestedIntFilterObjectSchema } from './NestedIntFilter.schema';
@@ -14,5 +13,5 @@ const makeSchema = () => z.object({
   _min: z.lazy(() => NestedEnumOrderStatusFilterObjectSchema).optional(),
   _max: z.lazy(() => NestedEnumOrderStatusFilterObjectSchema).optional()
 }).strict();
-export const EnumOrderStatusWithAggregatesFilterObjectSchema: z.ZodType<Prisma.EnumOrderStatusWithAggregatesFilter> = makeSchema() as unknown as z.ZodType<Prisma.EnumOrderStatusWithAggregatesFilter>;
+export const EnumOrderStatusWithAggregatesFilterObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const EnumOrderStatusWithAggregatesFilterObjectZodSchema = makeSchema();

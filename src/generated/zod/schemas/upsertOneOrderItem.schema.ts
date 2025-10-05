@@ -1,4 +1,3 @@
-import type { Prisma } from '@prisma/client';
 import * as z from 'zod';
 import { OrderItemSelectObjectSchema as OrderItemSelectObjectSchema } from './objects/OrderItemSelect.schema';
 import { OrderItemIncludeObjectSchema as OrderItemIncludeObjectSchema } from './objects/OrderItemInclude.schema';
@@ -8,6 +7,6 @@ import { OrderItemUncheckedCreateInputObjectSchema as OrderItemUncheckedCreateIn
 import { OrderItemUpdateInputObjectSchema as OrderItemUpdateInputObjectSchema } from './objects/OrderItemUpdateInput.schema';
 import { OrderItemUncheckedUpdateInputObjectSchema as OrderItemUncheckedUpdateInputObjectSchema } from './objects/OrderItemUncheckedUpdateInput.schema';
 
-export const OrderItemUpsertOneSchema: z.ZodType<Prisma.OrderItemUpsertArgs> = z.object({ select: OrderItemSelectObjectSchema.optional(), include: OrderItemIncludeObjectSchema.optional(), where: OrderItemWhereUniqueInputObjectSchema, create: z.union([ OrderItemCreateInputObjectSchema, OrderItemUncheckedCreateInputObjectSchema ]), update: z.union([ OrderItemUpdateInputObjectSchema, OrderItemUncheckedUpdateInputObjectSchema ]) }).strict() as unknown as z.ZodType<Prisma.OrderItemUpsertArgs>;
+export const OrderItemUpsertOneSchema: z.ZodType<any> = z.object({ select: OrderItemSelectObjectSchema.optional(), include: OrderItemIncludeObjectSchema.optional(), where: OrderItemWhereUniqueInputObjectSchema, create: z.union([ OrderItemCreateInputObjectSchema, OrderItemUncheckedCreateInputObjectSchema ]), update: z.union([ OrderItemUpdateInputObjectSchema, OrderItemUncheckedUpdateInputObjectSchema ]) }).strict() as unknown as z.ZodType<any>;
 
 export const OrderItemUpsertOneZodSchema = z.object({ select: OrderItemSelectObjectSchema.optional(), include: OrderItemIncludeObjectSchema.optional(), where: OrderItemWhereUniqueInputObjectSchema, create: z.union([ OrderItemCreateInputObjectSchema, OrderItemUncheckedCreateInputObjectSchema ]), update: z.union([ OrderItemUpdateInputObjectSchema, OrderItemUncheckedUpdateInputObjectSchema ]) }).strict();

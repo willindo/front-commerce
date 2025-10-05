@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { SizeSchema } from '../enums/Size.schema'
 
 const nestedenumsizefilterSchema = z.object({
@@ -8,5 +7,5 @@ const nestedenumsizefilterSchema = z.object({
   notIn: SizeSchema.array().optional(),
   not: z.union([SizeSchema, z.lazy(() => NestedEnumSizeFilterObjectSchema)]).optional()
 }).strict();
-export const NestedEnumSizeFilterObjectSchema: z.ZodType<Prisma.NestedEnumSizeFilter> = nestedenumsizefilterSchema as unknown as z.ZodType<Prisma.NestedEnumSizeFilter>;
+export const NestedEnumSizeFilterObjectSchema: z.ZodType<any> = nestedenumsizefilterSchema as unknown as z.ZodType<any>;
 export const NestedEnumSizeFilterObjectZodSchema = nestedenumsizefilterSchema;

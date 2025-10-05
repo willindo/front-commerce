@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "generatorVersion": "0.0.1",
-  "generatedAt": "2025-10-03T18:41:34.134Z",
+  "generatedAt": "2025-10-05T09:17:52.341Z",
   "outputPath": "/home/badsha/dev/mono-commerce/src/generated/zod",
   "files": [
     "schemas/enums/TransactionIsolationLevel.schema.ts",

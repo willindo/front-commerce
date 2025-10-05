@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 
 
 const makeSchema = () => z.object({
@@ -10,5 +9,5 @@ const makeSchema = () => z.object({
   priceAtPurchase: z.literal(true).optional(),
   _all: z.literal(true).optional()
 }).strict();
-export const OrderItemCountAggregateInputObjectSchema: z.ZodType<Prisma.OrderItemCountAggregateInputType> = makeSchema() as unknown as z.ZodType<Prisma.OrderItemCountAggregateInputType>;
+export const OrderItemCountAggregateInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const OrderItemCountAggregateInputObjectZodSchema = makeSchema();

@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { StringFieldUpdateOperationsInputObjectSchema as StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
 import { NullableStringFieldUpdateOperationsInputObjectSchema as NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
 import { RoleSchema } from '../enums/Role.schema';
@@ -19,5 +18,5 @@ const makeSchema = () => z.object({
   carts: z.lazy(() => CartUpdateManyWithoutUserNestedInputObjectSchema).optional(),
   wishlists: z.lazy(() => WishlistUpdateManyWithoutUserNestedInputObjectSchema).optional()
 }).strict();
-export const UserUpdateWithoutOrdersInputObjectSchema: z.ZodType<Prisma.UserUpdateWithoutOrdersInput> = makeSchema() as unknown as z.ZodType<Prisma.UserUpdateWithoutOrdersInput>;
+export const UserUpdateWithoutOrdersInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const UserUpdateWithoutOrdersInputObjectZodSchema = makeSchema();

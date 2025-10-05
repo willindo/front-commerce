@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { CategoryArgsObjectSchema as CategoryArgsObjectSchema } from './CategoryArgs.schema';
 import { ProductSizeFindManySchema as ProductSizeFindManySchema } from '../findManyProductSize.schema';
 import { CartItemFindManySchema as CartItemFindManySchema } from '../findManyCartItem.schema';
@@ -15,5 +14,5 @@ const makeSchema = () => z.object({
   orderItems: z.union([z.boolean(), z.lazy(() => OrderItemFindManySchema)]).optional(),
   _count: z.union([z.boolean(), z.lazy(() => ProductCountOutputTypeArgsObjectSchema)]).optional()
 }).strict();
-export const ProductIncludeObjectSchema: z.ZodType<Prisma.ProductInclude> = makeSchema() as unknown as z.ZodType<Prisma.ProductInclude>;
+export const ProductIncludeObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const ProductIncludeObjectZodSchema = makeSchema();

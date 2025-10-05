@@ -1,5 +1,4 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { CartArgsObjectSchema as CartArgsObjectSchema } from './CartArgs.schema';
 import { ProductArgsObjectSchema as ProductArgsObjectSchema } from './ProductArgs.schema'
 
@@ -16,5 +15,5 @@ const makeSchema = () => z.object({
   productDescription: z.boolean().optional(),
   productImage: z.boolean().optional()
 }).strict();
-export const CartItemSelectObjectSchema: z.ZodType<Prisma.CartItemSelect> = makeSchema() as unknown as z.ZodType<Prisma.CartItemSelect>;
+export const CartItemSelectObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const CartItemSelectObjectZodSchema = makeSchema();

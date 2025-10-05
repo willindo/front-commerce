@@ -1,9 +1,8 @@
 import * as z from 'zod';
-import type { Prisma } from '@prisma/client';
 import { SortOrderSchema } from '../enums/SortOrder.schema'
 
 const makeSchema = () => z.object({
   _count: SortOrderSchema.optional()
 }).strict();
-export const OrderItemOrderByRelationAggregateInputObjectSchema: z.ZodType<Prisma.OrderItemOrderByRelationAggregateInput> = makeSchema() as unknown as z.ZodType<Prisma.OrderItemOrderByRelationAggregateInput>;
+export const OrderItemOrderByRelationAggregateInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const OrderItemOrderByRelationAggregateInputObjectZodSchema = makeSchema();
