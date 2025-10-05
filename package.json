@@ -5,10 +5,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "start": "next start",
-    "build": "npm run sync:zod && next build",
-    "sync:zod": "node ./scripts/sync-types.js",
+    "build": "next build",
     "prebuild": "npm run ensure:zod",
-    "ensure:zod": "if [ ! -d src/generated/zod ]; then echo 'Generating missing Zod schemas...' && npm run fetch:zod; fi",
+    "ensure:zod": "if [ ! -d src/generated/zod ]; then echo '❌ Zod schemas missing! Copy them from backend or run sync-types locally.'; fi",
     "fetch:zod": "echo '❌ (optional) Implement fetch from backend repo or run prisma:generate in monorepo'"
   },
   "dependencies": {
