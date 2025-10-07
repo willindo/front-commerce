@@ -14,6 +14,9 @@ export default function Nav() {
         <Link href="/products" className="hover:underline">
           Products
         </Link>
+        <Link href="/shop" className="hover:underline">
+          Buy
+        </Link>
         <Link href="/cart" className="hover:underline">
           Cart
         </Link>
