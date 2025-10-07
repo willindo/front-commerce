@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../lib/types/users";
-import { loginUser, registerUser, fetchProfile } from "../lib/aply";
+import { loginUser, registerUser } from "../lib/aply";
 
 type AuthContextValue = {
   user: User | null;
@@ -23,19 +23,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   // Load profile on mount
-  useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const profile = await fetchProfile();
-        setUser(profile);
-      } catch (err) {
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadProfile();
-  }, []);
+  // useEffect(() => {
+  //   const loadProfile = async () => {
+  //     try {
+  //       const profile = await fetchProfile();
+  //       setUser(profile);
+  //     } catch (err) {
+  //       setUser(null);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   loadProfile();
+  // }, []);
 
   const saveUser = (user: User) => {
     setUser(user);

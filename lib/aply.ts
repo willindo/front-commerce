@@ -20,10 +20,10 @@ export async function loginUser(payload: {
   return res.data;
 }
 
-export async function fetchProfile(): Promise<User> {
-  const res = await api.get("/auth/me");
-  return res.data;
-}
+// export async function fetchProfile(): Promise<User> {
+//   const res = await api.get("/auth/me");
+//   return res.data;
+// }
 
 // --- USERS ---
 // export type PaginatedUsers = {
