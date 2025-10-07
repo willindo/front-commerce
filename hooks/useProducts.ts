@@ -2,56 +2,57 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   fetchProducts,
-  fetchProduct,
+  fetchProductById,
   createProduct,
   updateProduct,
   deleteProduct,
-} from "@/lib/api/products";
-import {
-  ProductResponseDto,
-  CreateProductDto,
-  UpdateProductDto,
+  Product,
   PaginatedProducts,
-} from "@/lib/types/products";
+} from "@/lib/api/products";
 
-export function useProducts(page: number, limit: number) {
+// ✅ Fetch paginated products
+export function useProducts(page = 1, limit = 10) {
   return useQuery<PaginatedProducts, Error>({
     queryKey: ["products", page, limit],
     queryFn: () => fetchProducts(page, limit),
   });
 }
 
+// ✅ Fetch single product
 export function useProduct(id: string) {
-  return useQuery<ProductResponseDto, Error>({
+  return useQuery<Product, Error>({
     queryKey: ["product", id],
-    queryFn: () => fetchProduct(id),
+    queryFn: () => fetchProductById(id),
     enabled: !!id,
   });
 }
 
+// ✅ Create product
 export function useCreateProduct() {
   const qc = useQueryClient();
-  return useMutation<ProductResponseDto, Error, CreateProductDto>({
+  return useMutation<
+    Product,
+    Error,
+    Omit<Product, "id" | "createdAt" | "updatedAt">
+  >({
     mutationFn: createProduct,
     onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
   });
 }
 
+// ✅ Update product
 export function useUpdateProduct() {
   const qc = useQueryClient();
-  return useMutation<
-    ProductResponseDto,
-    Error,
-    { id: string; data: UpdateProductDto }
-  >({
+  return useMutation<Product, Error, { id: string; data: Partial<Product> }>({
     mutationFn: ({ id, data }) => updateProduct(id, data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
   });
 }
 
+// ✅ Delete product
 export function useDeleteProduct() {
   const qc = useQueryClient();
-  return useMutation<ProductResponseDto, Error, string>({
+  return useMutation<void, Error, string>({
     mutationFn: deleteProduct,
     onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
   });
