@@ -1,18 +1,16 @@
 // lib/api/axios.ts
 import axios from "axios";
 
-const baseURL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  (typeof window === "undefined"
-    ? "http://localhost:3001" // for local SSR
-    : "http://localhost:3001"); // fallback for browser dev
+const isServer = typeof window === "undefined";
+const isProd = process.env.NODE_ENV === "production";
 
-export const api = axios.create({
-  baseURL,
-  withCredentials: true,
-});
+const baseURL = isProd
+  ? "https://backnest-vpjt.onrender.com"
+  : isServer
+  ? "http://localhost:3001"
+  : "http://localhost:3001";
 
-console.log("[Axios] Base URL:", baseURL);
+export const api = axios.create({ baseURL, withCredentials: true });
 
 api.interceptors.request.use((config) => {
   const userId = localStorage.getItem("userId"); // dynamic
