@@ -27,7 +27,7 @@ export default function Checkout() {
   const { cartQuery } = useCart();
 
   const mutation = useMutation<OrderResponseDto, Error, CreateOrderDto>({
-    mutationFn: createOrder,
+    // mutationFn: createOrder,
     onSuccess: () => {
       alert("✅ Order placed successfully!");
     },
