@@ -1,3 +1,6 @@
+import { api } from "./axios";
+
+api;
 export type CartItem = {
   id: string;
   productId: string;
@@ -18,7 +21,7 @@ export type Cart = {
   updatedAt: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+// const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 // temporary until auth phase
 const TEMP_USER_ID = "2b38ae62-d82f-4034-8419-c4c4737473ed";
@@ -26,7 +29,7 @@ export async function addToCart(
   productId: string,
   quantity = 1
 ): Promise<Cart> {
-  const res = await fetch(`${API_URL}/cart/${TEMP_USER_ID}/add`, {
+  const res = await fetch(`${api}/cart/${TEMP_USER_ID}/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ productId, quantity }),
@@ -36,7 +39,7 @@ export async function addToCart(
 }
 
 export async function getCart(): Promise<Cart> {
-  const res = await fetch(`${API_URL}/cart/${TEMP_USER_ID}`, {
+  const res = await fetch(`${api}/cart/${TEMP_USER_ID}`, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed to fetch cart");
@@ -47,7 +50,7 @@ export async function updateCartItem(
   itemId: string,
   quantity: number
 ): Promise<Cart> {
-  const res = await fetch(`${API_URL}/cart/${TEMP_USER_ID}/update`, {
+  const res = await fetch(`${api}/cart/${TEMP_USER_ID}/update`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ itemId, quantity }),
@@ -57,7 +60,7 @@ export async function updateCartItem(
 }
 
 export async function removeCartItem(itemId: string): Promise<Cart> {
-  const res = await fetch(`${API_URL}/cart/${TEMP_USER_ID}/item/${itemId}`, {
+  const res = await fetch(`${api}/cart/${TEMP_USER_ID}/item/${itemId}`, {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("Failed to remove cart item");
@@ -65,7 +68,7 @@ export async function removeCartItem(itemId: string): Promise<Cart> {
 }
 
 export async function clearCart(): Promise<Cart> {
-  const res = await fetch(`${API_URL}/cart/${TEMP_USER_ID}/clear`, {
+  const res = await fetch(`${api}/cart/${TEMP_USER_ID}/clear`, {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("Failed to clear cart");

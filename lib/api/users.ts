@@ -1,6 +1,6 @@
 // lib/api/users.ts
 import { User, Role } from "../types/users";
-
+import { api } from "./axios";
 export type PaginatedUsers = {
   data: User[];
   total: number;
@@ -21,7 +21,7 @@ export async function fetchUsers(
 
   const res = await fetch(
     // `https://backnest-vpjt.onrender.com/users?${params.toString()}`
-    `${process.env.NEXT_PUBLIC_API_URL}/users?${params.toString()}`
+    `${api}/users?${params.toString()}`
   );
   if (!res.ok) throw new Error("Failed to fetch users");
   return res.json();
