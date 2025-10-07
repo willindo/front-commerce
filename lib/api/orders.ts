@@ -1,19 +1,34 @@
+// lib/api/orders.ts
 import { api } from "./axios";
-import type { CreateOrderDto, OrderResponseDto } from "../types/order";
 
-export async function createOrder(
-  data?: CreateOrderDto
-): Promise<OrderResponseDto> {
-  const res = await api.post<OrderResponseDto>("/orders", data ?? {});
-  return res.data;
+export type OrderItem = {
+  id: string;
+  productId: string;
+  quantity: number;
+  price: number;
+};
+
+export type Order = {
+  id: string;
+  userId: string;
+  total: number;
+  items: OrderItem[];
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export async function createOrder(cartId: string): Promise<Order> {
+  const { data } = await api.post(`/orders`, { cartId });
+  return data;
 }
 
-export async function fetchOrders(): Promise<OrderResponseDto[]> {
-  const res = await api.get<OrderResponseDto[]>("/orders");
-  return res.data;
+export async function getOrders(userId: string): Promise<Order[]> {
+  const { data } = await api.get(`/orders/user/${userId}`);
+  return data;
 }
 
-export async function fetchOrder(id: string): Promise<OrderResponseDto> {
-  const res = await api.get<OrderResponseDto>(`/orders/${id}`);
-  return res.data;
+export async function getOrderById(orderId: string): Promise<Order> {
+  const { data } = await api.get(`/orders/${orderId}`);
+  return data;
 }

@@ -1,6 +1,7 @@
 // lib/api/users.ts
 import { User, Role } from "../types/users";
 import { api } from "./axios";
+
 export type PaginatedUsers = {
   data: User[];
   total: number;
@@ -13,16 +14,12 @@ export async function fetchUsers(
   limit = 10,
   role?: Role
 ): Promise<PaginatedUsers> {
-  const params = new URLSearchParams({
-    page: String(page),
-    limit: String(limit),
-  });
-  if (role) params.append("role", role);
+  const params = { page, limit, ...(role ? { role } : {}) };
+  const { data } = await api.get("/users", { params });
+  return data;
+}
 
-  const res = await fetch(
-    // `https://backnest-vpjt.onrender.com/users?${params.toString()}`
-    `${api}/users?${params.toString()}`
-  );
-  if (!res.ok) throw new Error("Failed to fetch users");
-  return res.json();
+export async function fetchUserById(id: string): Promise<User> {
+  const { data } = await api.get(`/users/${id}`);
+  return data;
 }
