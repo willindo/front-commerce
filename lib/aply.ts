@@ -1,11 +1,6 @@
 // lib/api.ts
-import axios from "axios";
+import { api } from "./api/axios";
 import { User, Role } from "./types/users";
-
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001",
-  withCredentials: true,
-});
 
 // --- AUTH ---
 export async function registerUser(payload: {
@@ -31,21 +26,21 @@ export async function fetchProfile(): Promise<User> {
 }
 
 // --- USERS ---
-export type PaginatedUsers = {
-  data: User[];
-  total: number;
-  page: number;
-  limit: number;
-};
+// export type PaginatedUsers = {
+//   data: User[];
+//   total: number;
+//   page: number;
+//   limit: number;
+// };
 
-export async function fetchUsers(
-  page = 1,
-  limit = 10,
-  role?: Role
-): Promise<PaginatedUsers> {
-  const params = { page, limit, ...(role ? { role } : {}) };
-  const res = await api.get("/users", { params });
-  return res.data;
-}
+// export async function fetchUsers(
+//   page = 1,
+//   limit = 10,
+//   role?: Role
+// ): Promise<PaginatedUsers> {
+//   const params = { page, limit, ...(role ? { role } : {}) };
+//   const res = await api.get("/users", { params });
+//   return res.data;
+// }
 
 export default api;
