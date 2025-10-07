@@ -4,18 +4,19 @@ import axios from "axios";
 const isServer = typeof window === "undefined";
 const isProd = process.env.NODE_ENV === "production";
 
-const baseURL = isProd
-  ? "https://backnest-vpjt.onrender.com"
-  : isServer
-  ? "http://localhost:3001"
-  : "http://localhost:3001";
-
-export const api = axios.create({ baseURL, withCredentials: true });
+export const api = axios.create({
+  baseURL: isServer
+    ? process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001" // SSR
+    : isProd
+    ? process.env.NEXT_PUBLIC_API_URL // CSR in prod
+    : "http://localhost:3001", // CSR dev
+  withCredentials: true,
+});
 
 api.interceptors.request.use((config) => {
-  const userId = localStorage.getItem("userId"); // dynamic
-  if (userId) {
-    config.headers["X-User-Id"] = userId;
+  if (typeof window !== "undefined") {
+    const userId = localStorage.getItem("userId");
+    if (userId) config.headers["X-User-Id"] = userId;
   }
   return config;
 });
