@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../lib/types/users";
-import { loginUser, registerUser, fetchProfile } from "../lib/api";
+import { loginUser, registerUser, fetchProfile } from "../lib/aply";
 
 type AuthContextValue = {
   user: User | null;
