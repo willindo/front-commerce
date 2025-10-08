@@ -1,24 +1,9 @@
-"use client";
-import { Product } from "@/lib/types/products";
-
-import { useEffect, useState } from "react";
+// app/products/page.tsx
+import { fetchProducts } from "@/lib/api/products";
 import Link from "next/link";
 
-// type Product = {
-//   id: string;
-//   name: string;
-//   price: number;
-//   stock: number;
-// };
-
-export default function ProductsPage({ products }: { products: Product[] }) {
-  // const [products, setProducts] = useState<Product[]>([]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:3001/products")
-  //     .then((res) => res.json())
-  //     .then((data) => setProducts(data.data || []));
-  // }, []);
+export default async function ProductsPage() {
+  const { data: products } = await fetchProducts();
 
   return (
     <div className="p-6">
