@@ -1,7 +1,7 @@
 "use client";
-// frontend/pages/profile.tsx
+
 import { useEffect } from "react";
-import Nav from "../../components/Nav";
+import Nav from "@/components/Nav";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
@@ -11,11 +11,12 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.replace("/login");
+      router.replace("/auth/login");
     }
-  }, [loading, user]);
+  }, [loading, user, router]);
 
-  if (loading || !user) return <div className="p-8">Loading...</div>;
+  if (loading) return <div className="p-8">Loading...</div>;
+  if (!user) return null;
 
   return (
     <>

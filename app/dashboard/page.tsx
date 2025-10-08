@@ -9,18 +9,17 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push("/auth/login");
+      router.replace("/auth/login");
     }
   }, [user, loading, router]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="p-6">Loading...</p>;
+  if (!user) return null; // Prevent flash
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold">
-        Welcome, {user?.name || user?.email}
-      </h1>
-      <p>Role: {user?.role}</p>
+      <h1 className="text-2xl font-bold">Welcome, {user.name || user.email}</h1>
+      <p>Role: {user.role}</p>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// context/AuthContext.tsx
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -22,20 +23,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load profile on mount
-  // useEffect(() => {
-  //   const loadProfile = async () => {
-  //     try {
-  //       const profile = await fetchProfile();
-  //       setUser(profile);
-  //     } catch (err) {
-  //       setUser(null);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   loadProfile();
-  // }, []);
+  // ✅ Load user from localStorage on app mount
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        localStorage.removeItem("user");
+      }
+    }
+    setLoading(false);
+  }, []);
 
   const saveUser = (user: User) => {
     setUser(user);
@@ -72,8 +71,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error("useAuth must be used within AuthProvider");
-  }
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
 };
