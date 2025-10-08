@@ -1,39 +1,41 @@
 "use client";
 
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { fetchProductById, updateProduct } from "@/lib/api/products";
 
-export default function EditProductPage() {
+interface Form {
+  name: string;
+  price: string;
+  stock: string;
+}
+
+interface Props {
+  params: { id: string };
+}
+
+export default function EditProductPage({ params }: Props) {
   const router = useRouter();
-  const params = useParams();
-  const id = params?.id as string;
-
-  const [form, setForm] = useState({ name: "", price: "", stock: "" });
+  const id = params.id;
+  const [form, setForm] = useState<Form>({ name: "", price: "", stock: "" });
 
   useEffect(() => {
-    if (id) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`)
-        .then((res) => res.json())
-        .then((data) =>
-          setForm({
-            name: data.name,
-            price: String(data.price),
-            stock: String(data.stock),
-          })
-        );
-    }
+    if (!id) return;
+    fetchProductById(id).then((data) =>
+      setForm({
+        name: data.name,
+        price: String(data.price),
+        stock: String(data.stock),
+      })
+    );
   }, [id]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.name,
-        price: Number(form.price),
-        stock: Number(form.stock),
-      }),
+    await updateProduct(id, {
+      name: form.name,
+      price: Number(form.price),
+      stock: Number(form.stock),
     });
     router.push("/products");
   }

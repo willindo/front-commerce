@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { createProduct } from "@/lib/api/products";
 
 export default function NewProductPage() {
   const router = useRouter();
@@ -9,14 +10,10 @@ export default function NewProductPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await fetch("http://localhost:3001/products", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.name,
-        price: Number(form.price),
-        stock: Number(form.stock),
-      }),
+    await createProduct({
+      name: form.name,
+      price: Number(form.price),
+      stock: Number(form.stock),
     });
     router.push("/products");
   }
