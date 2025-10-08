@@ -12,7 +12,7 @@ export default function EditProductPage() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3001/products/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`)
         .then((res) => res.json())
         .then((data) =>
           setForm({
@@ -26,7 +26,7 @@ export default function EditProductPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await fetch(`http://localhost:3001/products/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
