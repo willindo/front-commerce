@@ -1,16 +1,5 @@
-// lib/api/products.ts
 import { api } from "./axios";
-
-export type Product = {
-  id: string;
-  name: string;
-  price: number;
-  description?: string | null;
-  image?: string | null;
-  stock?: number;
-  createdAt: string;
-  updatedAt: string;
-};
+import { Product } from "@/lib/types/products"; // ✅ Use shared Product type
 
 export type PaginatedProducts = {
   data: Product[];
@@ -24,9 +13,7 @@ export async function fetchProducts(
   page = 1,
   limit = 10
 ): Promise<PaginatedProducts> {
-  const { data } = await api.get("/products", {
-    params: { page, limit },
-  });
+  const { data } = await api.get("/products", { params: { page, limit } });
   return data;
 }
 
@@ -36,7 +23,7 @@ export async function fetchProductById(id: string): Promise<Product> {
 }
 
 export async function createProduct(
-  product: Omit<Product, "id" | "createdAt" | "updatedAt">
+  product: Omit<Product, "id">
 ): Promise<Product> {
   const { data } = await api.post("/products", product);
   return data;
