@@ -1,16 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { createProduct } from "@/lib/api/products";
+import { useRouter } from "next/navigation";
+import { useCreateProduct } from "@/hooks/useProducts";
 
 export default function NewProductPage() {
   const router = useRouter();
+  const { mutateAsync: create } = useCreateProduct();
   const [form, setForm] = useState({ name: "", price: "", stock: "" });
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await createProduct({
+    await create({
       name: form.name,
       price: Number(form.price),
       stock: Number(form.stock),

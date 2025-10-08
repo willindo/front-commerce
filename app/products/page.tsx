@@ -1,9 +1,15 @@
-// app/products/page.tsx
-import { fetchProducts } from "@/lib/api/products";
-import Link from "next/link";
+"use client";
 
-export default async function ProductsPage() {
-  const { data: products } = await fetchProducts();
+import Link from "next/link";
+import { useProducts } from "@/hooks/useProducts";
+
+export default function ProductsPage() {
+  const { data, isLoading, error } = useProducts();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Failed to load products.</p>;
+
+  const products = data?.data || [];
 
   return (
     <div className="p-6">

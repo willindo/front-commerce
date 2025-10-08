@@ -1,4 +1,5 @@
-// hooks/useProducts.ts
+"use client";
+
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   fetchProducts,
@@ -6,53 +7,52 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-  Product,
-  PaginatedProducts,
 } from "@/lib/api/products";
 
-// ✅ Fetch paginated products
+// ✅ All products (paginated)
 export function useProducts(page = 1, limit = 10) {
-  return useQuery<PaginatedProducts, Error>({
-    queryKey: ["products", page, limit],
+  return useQuery({
+    queryKey: ["products", page],
     queryFn: () => fetchProducts(page, limit),
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
 
-// ✅ Fetch single product
+// ✅ Single product
 export function useProduct(id: string) {
-  return useQuery<Product, Error>({
+  return useQuery({
     queryKey: ["product", id],
     queryFn: () => fetchProductById(id),
     enabled: !!id,
   });
 }
 
-// ✅ Create product
+// ✅ Create
 export function useCreateProduct() {
   const qc = useQueryClient();
-  return useMutation<
-    Product,
-    Error,
-    Omit<Product, "id" | "createdAt" | "updatedAt">
-  >({
+  return useMutation({
     mutationFn: createProduct,
     onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
   });
 }
 
-// ✅ Update product
+// ✅ Update
 export function useUpdateProduct() {
   const qc = useQueryClient();
-  return useMutation<Product, Error, { id: string; data: Partial<Product> }>({
-    mutationFn: ({ id, data }) => updateProduct(id, data),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: any }) =>
+      updateProduct(id, data),
+    onSuccess: (_, { id }) => {
+      qc.invalidateQueries({ queryKey: ["products"] });
+      qc.invalidateQueries({ queryKey: ["product", id] });
+    },
   });
 }
 
-// ✅ Delete product
+// ✅ Delete
 export function useDeleteProduct() {
   const qc = useQueryClient();
-  return useMutation<void, Error, string>({
+  return useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
   });

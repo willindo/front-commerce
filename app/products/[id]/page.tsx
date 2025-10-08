@@ -1,30 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useProduct } from "@/hooks/useProducts";
 import { useParams } from "next/navigation";
 
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  stock: number;
-  description?: string;
-};
-
 export default function ProductDetailPage() {
-  const params = useParams();
-  const id = params?.id as string;
-  const [product, setProduct] = useState<Product | null>(null);
+  const { id } = useParams();
+  const { data: product, isLoading, error } = useProduct(id as string);
 
-  useEffect(() => {
-    if (id) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`)
-        .then((res) => res.json())
-        .then((data) => setProduct(data));
-    }
-  }, [id]);
-
-  if (!product) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
+  if (error || !product) return <p>Product not found.</p>;
 
   return (
     <div className="p-6">

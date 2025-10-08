@@ -1,44 +1,40 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { fetchProductById, updateProduct } from "@/lib/api/products";
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useProduct, useUpdateProduct } from "@/hooks/useProducts";
 
-interface Form {
-  name: string;
-  price: string;
-  stock: string;
-}
-
-interface Props {
-  params: { id: string };
-}
-
-export default function EditProductPage({ params }: Props) {
+export default function EditProductPage() {
   const router = useRouter();
-  const id = params.id;
-  const [form, setForm] = useState<Form>({ name: "", price: "", stock: "" });
+  const { id } = useParams();
+  const { data: product } = useProduct(id as string);
+  const { mutateAsync: update } = useUpdateProduct();
+
+  const [form, setForm] = useState({ name: "", price: "", stock: "" });
 
   useEffect(() => {
-    if (!id) return;
-    fetchProductById(id).then((data) =>
+    if (product)
       setForm({
-        name: data.name,
-        price: String(data.price),
-        stock: String(data.stock),
-      })
-    );
-  }, [id]);
+        name: product.name,
+        price: String(product.price),
+        stock: String(product.stock),
+      });
+  }, [product]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await updateProduct(id, {
-      name: form.name,
-      price: Number(form.price),
-      stock: Number(form.stock),
+    await update({
+      id: id as string,
+      data: {
+        name: form.name,
+        price: Number(form.price),
+        stock: Number(form.stock),
+      },
     });
     router.push("/products");
   }
+
+  if (!product) return <p>Loading...</p>;
 
   return (
     <div className="p-6">
