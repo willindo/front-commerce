@@ -2,10 +2,11 @@ import * as z from 'zod';
 
 
 const makeSchema = () => z.object({
-  id: z.string().optional()
+  id: z.string().optional(),
+  userId: z.string().optional()
 }).strict().superRefine((obj, ctx) => {
         const presentTop = (k: string) => (obj as any)[k] != null;
-        const singles: string[] = ["id"] as string[];
+        const singles: string[] = ["id","userId"] as string[];
         const groups: string[][] = [] as string[][];
 
         const anySingle = Array.isArray(singles) && singles.length > 0 ? singles.some(presentTop) : false;

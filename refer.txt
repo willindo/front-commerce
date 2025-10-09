@@ -143,4 +143,5 @@ Resonant – emotionally or conceptually fitting
 
 Synergistic – works better in combination than alone
 
-redundant
+redundant 
+ npx prisma migrate dev --create-only --name refine-schema

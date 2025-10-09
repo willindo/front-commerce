@@ -4,7 +4,8 @@ import { StringNullableFilterObjectSchema as StringNullableFilterObjectSchema } 
 import { EnumRoleFilterObjectSchema as EnumRoleFilterObjectSchema } from './EnumRoleFilter.schema';
 import { RoleSchema } from '../enums/Role.schema';
 import { DateTimeFilterObjectSchema as DateTimeFilterObjectSchema } from './DateTimeFilter.schema';
-import { CartListRelationFilterObjectSchema as CartListRelationFilterObjectSchema } from './CartListRelationFilter.schema';
+import { CartNullableScalarRelationFilterObjectSchema as CartNullableScalarRelationFilterObjectSchema } from './CartNullableScalarRelationFilter.schema';
+import { CartWhereInputObjectSchema as CartWhereInputObjectSchema } from './CartWhereInput.schema';
 import { OrderListRelationFilterObjectSchema as OrderListRelationFilterObjectSchema } from './OrderListRelationFilter.schema';
 import { WishlistListRelationFilterObjectSchema as WishlistListRelationFilterObjectSchema } from './WishlistListRelationFilter.schema'
 
@@ -19,7 +20,7 @@ const userwhereinputSchema = z.object({
   role: z.union([z.lazy(() => EnumRoleFilterObjectSchema), RoleSchema]).optional(),
   createdAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
   updatedAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
-  carts: z.lazy(() => CartListRelationFilterObjectSchema).optional(),
+  carts: z.union([z.lazy(() => CartNullableScalarRelationFilterObjectSchema), z.lazy(() => CartWhereInputObjectSchema)]).optional(),
   orders: z.lazy(() => OrderListRelationFilterObjectSchema).optional(),
   wishlists: z.lazy(() => WishlistListRelationFilterObjectSchema).optional()
 }).strict();

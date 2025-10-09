@@ -7,12 +7,15 @@ import {
   removeCartItem,
   clearCart,
   Cart,
+  verifyCart,
 } from "@/lib/api/cart";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     getCart()
@@ -44,6 +47,22 @@ export default function CartPage() {
     (sum, item) => sum + (item.product.price || 0) * item.quantity,
     0
   );
+
+  async function handleProceedToCheckout() {
+    if (!cart?.id) return;
+    try {
+      const verified = await verifyCart(cart.id);
+      if (!verified.isValid) {
+        alert("Some items in your cart are unavailable or out of stock.");
+        return;
+      }
+
+      router.push(`/checkout?cartId=${cart.id}`);
+    } catch (err) {
+      console.error("Cart verification failed:", err);
+      alert("Could not verify cart. Please try again.");
+    }
+  }
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -103,12 +122,12 @@ export default function CartPage() {
         >
           Clear Cart
         </button>
-        <Link
-          href={`/checkout?cartId=${cart.id}`}
+        <button
+          onClick={handleProceedToCheckout}
           className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
         >
           Proceed to Checkout
-        </Link>
+        </button>
       </div>
     </div>
   );

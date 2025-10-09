@@ -2,7 +2,6 @@ import * as z from 'zod';
 
 
 const makeSchema = () => z.object({
-  carts: z.boolean().optional(),
   orders: z.boolean().optional(),
   wishlists: z.boolean().optional()
 }).strict();

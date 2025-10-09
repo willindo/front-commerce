@@ -4,7 +4,7 @@ import { NullableStringFieldUpdateOperationsInputObjectSchema as NullableStringF
 import { RoleSchema } from '../enums/Role.schema';
 import { EnumRoleFieldUpdateOperationsInputObjectSchema as EnumRoleFieldUpdateOperationsInputObjectSchema } from './EnumRoleFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema as DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
-import { CartUncheckedUpdateManyWithoutUserNestedInputObjectSchema as CartUncheckedUpdateManyWithoutUserNestedInputObjectSchema } from './CartUncheckedUpdateManyWithoutUserNestedInput.schema';
+import { CartUncheckedUpdateOneWithoutUserNestedInputObjectSchema as CartUncheckedUpdateOneWithoutUserNestedInputObjectSchema } from './CartUncheckedUpdateOneWithoutUserNestedInput.schema';
 import { WishlistUncheckedUpdateManyWithoutUserNestedInputObjectSchema as WishlistUncheckedUpdateManyWithoutUserNestedInputObjectSchema } from './WishlistUncheckedUpdateManyWithoutUserNestedInput.schema'
 
 const makeSchema = () => z.object({
@@ -15,7 +15,7 @@ const makeSchema = () => z.object({
   role: z.union([RoleSchema, z.lazy(() => EnumRoleFieldUpdateOperationsInputObjectSchema)]).optional(),
   createdAt: z.union([z.coerce.date(), z.lazy(() => DateTimeFieldUpdateOperationsInputObjectSchema)]).optional(),
   updatedAt: z.union([z.coerce.date(), z.lazy(() => DateTimeFieldUpdateOperationsInputObjectSchema)]).optional(),
-  carts: z.lazy(() => CartUncheckedUpdateManyWithoutUserNestedInputObjectSchema).optional(),
+  carts: z.lazy(() => CartUncheckedUpdateOneWithoutUserNestedInputObjectSchema).optional(),
   wishlists: z.lazy(() => WishlistUncheckedUpdateManyWithoutUserNestedInputObjectSchema).optional()
 }).strict();
 export const UserUncheckedUpdateWithoutOrdersInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;

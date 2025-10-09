@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { SortOrderSchema } from '../enums/SortOrder.schema';
 import { SortOrderInputObjectSchema as SortOrderInputObjectSchema } from './SortOrderInput.schema';
-import { CartOrderByRelationAggregateInputObjectSchema as CartOrderByRelationAggregateInputObjectSchema } from './CartOrderByRelationAggregateInput.schema';
+import { CartOrderByWithRelationInputObjectSchema as CartOrderByWithRelationInputObjectSchema } from './CartOrderByWithRelationInput.schema';
 import { OrderOrderByRelationAggregateInputObjectSchema as OrderOrderByRelationAggregateInputObjectSchema } from './OrderOrderByRelationAggregateInput.schema';
 import { WishlistOrderByRelationAggregateInputObjectSchema as WishlistOrderByRelationAggregateInputObjectSchema } from './WishlistOrderByRelationAggregateInput.schema'
 
@@ -13,7 +13,7 @@ const makeSchema = () => z.object({
   role: SortOrderSchema.optional(),
   createdAt: SortOrderSchema.optional(),
   updatedAt: SortOrderSchema.optional(),
-  carts: z.lazy(() => CartOrderByRelationAggregateInputObjectSchema).optional(),
+  carts: z.lazy(() => CartOrderByWithRelationInputObjectSchema).optional(),
   orders: z.lazy(() => OrderOrderByRelationAggregateInputObjectSchema).optional(),
   wishlists: z.lazy(() => WishlistOrderByRelationAggregateInputObjectSchema).optional()
 }).strict();

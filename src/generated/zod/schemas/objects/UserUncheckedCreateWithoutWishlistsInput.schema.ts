@@ -1,6 +1,6 @@
 import * as z from 'zod';
 import { RoleSchema } from '../enums/Role.schema';
-import { CartUncheckedCreateNestedManyWithoutUserInputObjectSchema as CartUncheckedCreateNestedManyWithoutUserInputObjectSchema } from './CartUncheckedCreateNestedManyWithoutUserInput.schema';
+import { CartUncheckedCreateNestedOneWithoutUserInputObjectSchema as CartUncheckedCreateNestedOneWithoutUserInputObjectSchema } from './CartUncheckedCreateNestedOneWithoutUserInput.schema';
 import { OrderUncheckedCreateNestedManyWithoutUserInputObjectSchema as OrderUncheckedCreateNestedManyWithoutUserInputObjectSchema } from './OrderUncheckedCreateNestedManyWithoutUserInput.schema'
 
 const makeSchema = () => z.object({
@@ -11,7 +11,7 @@ const makeSchema = () => z.object({
   role: RoleSchema.optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
-  carts: z.lazy(() => CartUncheckedCreateNestedManyWithoutUserInputObjectSchema).optional(),
+  carts: z.lazy(() => CartUncheckedCreateNestedOneWithoutUserInputObjectSchema).optional(),
   orders: z.lazy(() => OrderUncheckedCreateNestedManyWithoutUserInputObjectSchema).optional()
 }).strict();
 export const UserUncheckedCreateWithoutWishlistsInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;

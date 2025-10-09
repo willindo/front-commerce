@@ -1,4 +1,5 @@
 // lib/api/cart.ts
+import { VerifyCartResponse } from "@/src/shared/dto/checkout/verify-cart.dto";
 import { api } from "./axios";
 
 export type CartItem = {
@@ -58,5 +59,12 @@ export async function removeCartItem(itemId: string): Promise<Cart> {
 
 export async function clearCart(): Promise<Cart> {
   const { data } = await api.delete(`/cart/${TEMP_USER_ID}/clear`);
+  return data;
+}
+
+export async function verifyCart(cartId: string): Promise<VerifyCartResponse> {
+  const { data } = await api.post(`/checkout/${TEMP_USER_ID}/verify`, {
+    cartId,
+  });
   return data;
 }

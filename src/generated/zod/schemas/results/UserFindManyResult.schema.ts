@@ -8,7 +8,7 @@ export const UserFindManyResultSchema = z.object({
   role: z.unknown(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  carts: z.array(z.unknown()),
+  carts: z.unknown().optional(),
   orders: z.array(z.unknown()),
   wishlists: z.array(z.unknown())
 })),
