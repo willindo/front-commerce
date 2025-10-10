@@ -1,67 +1,70 @@
 "use client";
-import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "next/navigation";
-
-const checkoutSchema = z.object({
-  cartId: z.string(),
-  addressId: z.string().optional(),
-  paymentMethod: z.enum(["stripe", "razorpay"]).optional(),
-});
-
-type CheckoutForm = z.infer<typeof checkoutSchema>;
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  CheckoutSchema,
+  CheckoutBody,
+  VerifyCartResponse as VerifyCartRes,
+} from "@/lib/types/checkout";
+import { checkout } from "@/lib/api/checkout";
+import { verifyCart, VerifyCartResponse } from "@/lib/api/cart";
 
 export default function CheckoutPage() {
+  const [invalidItems, setInvalidItems] = useState<VerifyCartResponse | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const searchParams = useSearchParams();
-  const cartId = searchParams.get("cartId");
+  const [error, setError] = useState("");
 
-  const { register, handleSubmit } = useForm<CheckoutForm>({
-    resolver: zodResolver(checkoutSchema),
+  const { register, handleSubmit } = useForm<CheckoutBody>({
+    resolver: zodResolver(CheckoutSchema),
   });
 
-  const onSubmit = async (data: CheckoutForm) => {
-    console.log("[Checkout Submit]", data);
+  useEffect(() => {
+    const TEMP_USER_ID = "2b38ae62-d82f-4034-8419-c4c4737473ed";
 
-    if (!cartId) {
-      setError("Cart ID is missing in URL");
-      return;
-    }
+    verifyCart(TEMP_USER_ID)
+      .then((res) => {
+        if (!res.isValid) setInvalidItems(res);
+      })
+      .catch((err) => setError(err.message));
+  }, []);
 
-    setLoading(true);
-    setError("");
+  const onSubmit = async (data: CheckoutBody) => {
     try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, cartId }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Checkout failed");
-      }
-
+      setLoading(true);
+      await checkout(data);
       setSuccess(true);
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || "Checkout failed");
     } finally {
       setLoading(false);
     }
   };
 
-  if (success) {
-    return <h2>✅ Order placed successfully!</h2>;
-  }
+  if (success) return <h2>✅ Order placed successfully!</h2>;
 
   return (
     <div className="max-w-lg mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Checkout</h1>
+
+      {invalidItems && invalidItems.invalidItems.length > 0 && (
+        <div className="text-red-600 mb-4">
+          <h2>Cart Issues:</h2>
+          <ul>
+            {invalidItems.invalidItems.map((item) => (
+              <li key={item.id}>
+                {item.productName}: {item.reason}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {error && <div className="text-red-600 mb-2">{error}</div>}
+
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <input
           {...register("addressId")}

@@ -1,7 +1,18 @@
 import { z } from "zod";
 
 /**
- * ✅ Single invalid item schema — clean, reusable structure.
+ * Checkout form schema
+ */
+export const CheckoutSchema = z.object({
+  cartId: z.string(),
+  addressId: z.string().uuid().nullable().optional(),
+  paymentMethod: z.enum(["stripe", "razorpay"]).optional(),
+});
+
+export type CheckoutBody = z.infer<typeof CheckoutSchema>;
+
+/**
+ * Verify cart response
  */
 export const InvalidCartItemSchema = z.object({
   id: z.string(),
@@ -10,9 +21,6 @@ export const InvalidCartItemSchema = z.object({
   reason: z.string(),
 });
 
-/**
- * ✅ Response DTO for verifyCart()
- */
 export const VerifyCartResponseSchema = z.object({
   isValid: z.boolean(),
   invalidItems: z.array(InvalidCartItemSchema),

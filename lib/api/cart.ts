@@ -1,5 +1,4 @@
 // lib/api/cart.ts
-import { VerifyCartResponse } from "@/src/shared/dto/checkout/verify-cart.dto";
 import { api } from "./axios";
 
 export type CartItem = {
@@ -20,6 +19,27 @@ export type Cart = {
   items: CartItem[];
   createdAt: string;
   updatedAt: string;
+};
+export type VerifiedItem = {
+  id: string;
+  productId: string;
+  productName: string;
+  productImage: string | null;
+  price: number;
+  quantity: number;
+  subtotal: number;
+  reason?: string;
+};
+
+export type VerifyCartResponse = {
+  cartId: string;
+  userId: string;
+  items: VerifiedItem[];
+  subtotal: number;
+  totalQuantity: number;
+  invalidItems: { id: string; reason: string; productName: string }[];
+  isValid: boolean;
+  verifiedAt: string;
 };
 
 // Temporary user until auth is integrated
@@ -62,9 +82,7 @@ export async function clearCart(): Promise<Cart> {
   return data;
 }
 
-export async function verifyCart(cartId: string): Promise<VerifyCartResponse> {
-  const { data } = await api.post(`/checkout/${TEMP_USER_ID}/verify`, {
-    cartId,
-  });
+export async function verifyCart(userId: string): Promise<VerifyCartResponse> {
+  const { data } = await api.get(`/cart/${userId}/verify`);
   return data;
 }

@@ -49,9 +49,9 @@ export default function CartPage() {
   );
 
   async function handleProceedToCheckout() {
-    if (!cart?.id) return;
+    if (!cart?.id || !cart?.userId) return;
     try {
-      const verified = await verifyCart(cart.id);
+      const verified = await verifyCart(cart.userId); // ✅ fixed
       if (!verified.isValid) {
         alert("Some items in your cart are unavailable or out of stock.");
         return;
