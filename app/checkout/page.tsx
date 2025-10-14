@@ -1,89 +1,100 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  CheckoutSchema,
-  CheckoutBody,
-  VerifyCartResponse as VerifyCartRes,
-} from "@/lib/types/checkout";
-import { checkout } from "@/lib/api/checkout";
-import { verifyCart, VerifyCartResponse } from "@/lib/api/cart";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
-  const [invalidItems, setInvalidItems] = useState<VerifyCartResponse | null>(
-    null
-  );
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
+  const [amount, setAmount] = useState(100); // rupees
+  const router = useRouter();
+  const API = process.env.NEXT_PUBLIC_API_URL!;
 
-  const { register, handleSubmit } = useForm<CheckoutBody>({
-    resolver: zodResolver(CheckoutSchema),
-  });
-
-  useEffect(() => {
-    const TEMP_USER_ID = "2b38ae62-d82f-4034-8419-c4c4737473ed";
-
-    verifyCart(TEMP_USER_ID)
-      .then((res) => {
-        if (!res.isValid) setInvalidItems(res);
-      })
-      .catch((err) => setError(err.message));
-  }, []);
-
-  const onSubmit = async (data: CheckoutBody) => {
+  const handleCheckout = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      await checkout(data);
-      setSuccess(true);
+      // 1) Create internal order (server will read cart or payload)
+      const createOrderRes = await fetch(`${API}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-user-id": "user_123" /* or use auth */,
+        },
+        body: JSON.stringify({
+          items: [], // optional: server will pull from cart if empty
+          paymentMethod: "RAZORPAY",
+          // include address etc
+        }),
+      });
+      if (!createOrderRes.ok) throw new Error("Failed to create order");
+      const orderJson = await createOrderRes.json();
+      const internalOrderId = orderJson.id;
+      const total = Number(orderJson.total || amount);
+
+      // 2) Create Razorpay order on server (linking to internal order)
+      const createPaymentRes = await fetch(`${API}/payments/create-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId: internalOrderId, amount: total }),
+      });
+      if (!createPaymentRes.ok) {
+        const txt = await createPaymentRes.text();
+        throw new Error(`create-order failed: ${txt}`);
+      }
+      const paymentJson = await createPaymentRes.json();
+      const razorpayOrderId = paymentJson.razorpayOrderId;
+
+      // 3) Open Razorpay checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: Math.round(total * 100),
+        currency: "INR",
+        name: "Reload Store",
+        description: `Order ${internalOrderId}`,
+        order_id: razorpayOrderId,
+        handler: async function (res: any) {
+          // res: { razorpay_order_id, razorpay_payment_id, razorpay_signature }
+          // attach the internal order id so backend can reconcile
+          await fetch(`${API}/payments/verify`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              orderId: internalOrderId,
+              razorpay_order_id: res.razorpay_order_id,
+              razorpay_payment_id: res.razorpay_payment_id,
+              razorpay_signature: res.razorpay_signature,
+            }),
+          });
+
+          // redirect to order success - optionally include internalOrderId
+          router.push(`/order-success?orderId=${internalOrderId}`);
+        },
+        prefill: {
+          name: "Test User",
+          email: "test@example.com",
+          contact: "9999999999",
+        },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
     } catch (err: any) {
-      setError(err.message || "Checkout failed");
+      console.error(err);
+      alert("Payment failed: " + (err.message || err));
     } finally {
       setLoading(false);
     }
   };
 
-  if (success) return <h2>✅ Order placed successfully!</h2>;
-
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Checkout</h1>
-
-      {invalidItems && invalidItems.invalidItems.length > 0 && (
-        <div className="text-red-600 mb-4">
-          <h2>Cart Issues:</h2>
-          <ul>
-            {invalidItems.invalidItems.map((item) => (
-              <li key={item.id}>
-                {item.productName}: {item.reason}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {error && <div className="text-red-600 mb-2">{error}</div>}
-
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <input
-          {...register("addressId")}
-          placeholder="Address ID (optional)"
-          className="border p-2 rounded"
-        />
-        <select {...register("paymentMethod")} className="border p-2 rounded">
-          <option value="">Select Payment Method (optional)</option>
-          <option value="stripe">Stripe</option>
-          <option value="razorpay">Razorpay</option>
-        </select>
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white py-2 px-4 rounded"
-        >
-          {loading ? "Processing..." : "Place Order"}
-        </button>
-      </form>
+    <div className="p-6 flex flex-col items-center">
+      <h2 className="text-xl mb-4">Checkout</h2>
+      <p className="mb-2">Total Amount: ₹{amount}</p>
+      <button
+        onClick={handleCheckout}
+        disabled={loading}
+        className="bg-black text-white px-4 py-2 rounded-md"
+      >
+        {loading ? "Processing..." : "Pay Now"}
+      </button>
     </div>
   );
 }

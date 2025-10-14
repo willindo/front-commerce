@@ -1,10 +1,7 @@
 import { api } from "@/lib/api/axios";
-import {
-  CheckoutBody,
-  VerifyCartResponse,
-  VerifyCartResponseSchema,
-} from "../types/checkout";
+import { CheckoutBody } from "../types/checkout";
 
+import { verifyCart, VerifyCartResponse } from "@/lib/api/cart";
 /**
  * Replace with authenticated user ID or use context
  */
@@ -21,7 +18,7 @@ export async function checkout(payload: CheckoutBody) {
 /**
  * Verify cart API call
  */
-export async function verifyCart(): Promise<VerifyCartResponse> {
-  const { data } = await api.get("/cart/verify");
-  return VerifyCartResponseSchema.parse(data);
-}
+// export async function verifyCart(): Promise<VerifyCartResponse> {
+//   const { data } = await api.get("/cart/verify");
+//   return VerifyCartResponseSchema.parse(data);
+// }

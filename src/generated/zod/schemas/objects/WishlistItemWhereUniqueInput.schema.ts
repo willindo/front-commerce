@@ -1,12 +1,13 @@
 import * as z from 'zod';
-
+import { WishlistItemWishlistIdProductIdCompoundUniqueInputObjectSchema as WishlistItemWishlistIdProductIdCompoundUniqueInputObjectSchema } from './WishlistItemWishlistIdProductIdCompoundUniqueInput.schema'
 
 const makeSchema = () => z.object({
-  id: z.string().optional()
+  id: z.string().optional(),
+  wishlistId_productId: z.lazy(() => WishlistItemWishlistIdProductIdCompoundUniqueInputObjectSchema).optional()
 }).strict().superRefine((obj, ctx) => {
         const presentTop = (k: string) => (obj as any)[k] != null;
         const singles: string[] = ["id"] as string[];
-        const groups: string[][] = [] as string[][];
+        const groups: string[][] = [["wishlistId","productId"]] as string[][];
 
         const anySingle = Array.isArray(singles) && singles.length > 0 ? singles.some(presentTop) : false;
 

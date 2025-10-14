@@ -10,9 +10,10 @@ export const UserModelSchema = z.object({
     role: RoleSchema,
     createdAt: z.date(),
     updatedAt: z.date(),
-    carts: z.unknown().nullable(),
+    cart: z.unknown().nullable(),
     orders: z.array(z.unknown()),
-    wishlists: z.array(z.unknown())
+    wishlists: z.array(z.unknown()),
+    payments: z.array(z.unknown())
 }).strict();
 
-export type UserModelType = z.infer<typeof UserModelSchema>;
+export type UserPureType = z.infer<typeof UserModelSchema>;

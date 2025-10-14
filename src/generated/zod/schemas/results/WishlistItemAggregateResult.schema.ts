@@ -1,10 +1,10 @@
 import * as z from 'zod';
 export const WishlistItemAggregateResultSchema = z.object({  _count: z.object({
     id: z.number(),
-    product: z.number(),
     productId: z.number(),
-    wishlist: z.number(),
-    wishlistId: z.number()
+    wishlistId: z.number(),
+    product: z.number(),
+    wishlist: z.number()
   }).optional(),
   _min: z.object({
     id: z.string().nullable(),

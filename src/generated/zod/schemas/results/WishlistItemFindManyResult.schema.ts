@@ -2,10 +2,10 @@ import * as z from 'zod';
 export const WishlistItemFindManyResultSchema = z.object({
   data: z.array(z.object({
   id: z.string(),
-  product: z.unknown(),
   productId: z.string(),
-  wishlist: z.unknown(),
-  wishlistId: z.string()
+  wishlistId: z.string(),
+  product: z.unknown(),
+  wishlist: z.unknown()
 })),
   pagination: z.object({
   page: z.number().int().min(1),

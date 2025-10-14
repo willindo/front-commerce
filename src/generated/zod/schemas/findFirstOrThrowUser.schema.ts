@@ -16,9 +16,10 @@ export const UserFindFirstOrThrowSelectSchema: z.ZodType<any> = z.object({
     role: z.boolean().optional(),
     createdAt: z.boolean().optional(),
     updatedAt: z.boolean().optional(),
-    carts: z.boolean().optional(),
+    cart: z.boolean().optional(),
     orders: z.boolean().optional(),
     wishlists: z.boolean().optional(),
+    payments: z.boolean().optional(),
     _count: z.boolean().optional()
   }).strict() as unknown as z.ZodType<any>;
 
@@ -30,12 +31,13 @@ export const UserFindFirstOrThrowSelectZodSchema = z.object({
     role: z.boolean().optional(),
     createdAt: z.boolean().optional(),
     updatedAt: z.boolean().optional(),
-    carts: z.boolean().optional(),
+    cart: z.boolean().optional(),
     orders: z.boolean().optional(),
     wishlists: z.boolean().optional(),
+    payments: z.boolean().optional(),
     _count: z.boolean().optional()
   }).strict();
 
-export const UserFindFirstOrThrowSchema: z.ZodType<any> = z.object({ select: UserFindFirstOrThrowSelectSchema.optional(), include: z.lazy(() => UserIncludeObjectSchema.optional()), orderBy: z.union([UserOrderByWithRelationInputObjectSchema, UserOrderByWithRelationInputObjectSchema.array()]).optional(), where: UserWhereInputObjectSchema.optional(), cursor: UserWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([UserScalarFieldEnumSchema, UserScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
+export const UserFindFirstOrThrowSchema: z.ZodType<any> = z.object({ select: UserFindFirstOrThrowSelectSchema.optional(), include: UserIncludeObjectSchema.optional(), orderBy: z.union([UserOrderByWithRelationInputObjectSchema, UserOrderByWithRelationInputObjectSchema.array()]).optional(), where: UserWhereInputObjectSchema.optional(), cursor: UserWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([UserScalarFieldEnumSchema, UserScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
-export const UserFindFirstOrThrowZodSchema = z.object({ select: UserFindFirstOrThrowSelectSchema.optional(), include: z.lazy(() => UserIncludeObjectSchema.optional()), orderBy: z.union([UserOrderByWithRelationInputObjectSchema, UserOrderByWithRelationInputObjectSchema.array()]).optional(), where: UserWhereInputObjectSchema.optional(), cursor: UserWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([UserScalarFieldEnumSchema, UserScalarFieldEnumSchema.array()]).optional() }).strict();
+export const UserFindFirstOrThrowZodSchema = z.object({ select: UserFindFirstOrThrowSelectSchema.optional(), include: UserIncludeObjectSchema.optional(), orderBy: z.union([UserOrderByWithRelationInputObjectSchema, UserOrderByWithRelationInputObjectSchema.array()]).optional(), where: UserWhereInputObjectSchema.optional(), cursor: UserWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([UserScalarFieldEnumSchema, UserScalarFieldEnumSchema.array()]).optional() }).strict();

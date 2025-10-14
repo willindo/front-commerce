@@ -34,10 +34,24 @@ export type VerifiedItem = {
 export type VerifyCartResponse = {
   cartId: string;
   userId: string;
-  items: VerifiedItem[];
+  items: {
+    id: string;
+    productId: string;
+    productName: string;
+    productImage: string | null;
+    price: number;
+    quantity: number;
+    subtotal: number;
+    reason?: string;
+  }[];
   subtotal: number;
   totalQuantity: number;
-  invalidItems: { id: string; reason: string; productName: string }[];
+  invalidItems: {
+    id: string;
+    productId: string;
+    productName: string;
+    reason: string;
+  }[];
   isValid: boolean;
   verifiedAt: string;
 };

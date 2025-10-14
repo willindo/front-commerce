@@ -10,4 +10,4 @@ export const ProductSizeModelSchema = z.object({
     productId: z.string()
 }).strict();
 
-export type ProductSizeModelType = z.infer<typeof ProductSizeModelSchema>;
+export type ProductSizePureType = z.infer<typeof ProductSizeModelSchema>;

@@ -1,8 +1,12 @@
 import * as z from 'zod';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
-import { FloatFilterObjectSchema as FloatFilterObjectSchema } from './FloatFilter.schema';
+import { DecimalFilterObjectSchema as DecimalFilterObjectSchema } from './DecimalFilter.schema';
 import { EnumOrderStatusFilterObjectSchema as EnumOrderStatusFilterObjectSchema } from './EnumOrderStatusFilter.schema';
 import { OrderStatusSchema } from '../enums/OrderStatus.schema';
+import { StringNullableFilterObjectSchema as StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
+import { EnumPaymentStatusFilterObjectSchema as EnumPaymentStatusFilterObjectSchema } from './EnumPaymentStatusFilter.schema';
+import { PaymentStatusSchema } from '../enums/PaymentStatus.schema';
+import { JsonNullableFilterObjectSchema as JsonNullableFilterObjectSchema } from './JsonNullableFilter.schema';
 import { DateTimeFilterObjectSchema as DateTimeFilterObjectSchema } from './DateTimeFilter.schema'
 
 const orderscalarwhereinputSchema = z.object({
@@ -11,8 +15,12 @@ const orderscalarwhereinputSchema = z.object({
   NOT: z.union([z.lazy(() => OrderScalarWhereInputObjectSchema), z.lazy(() => OrderScalarWhereInputObjectSchema).array()]).optional(),
   id: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
   userId: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
-  total: z.union([z.lazy(() => FloatFilterObjectSchema), z.number()]).optional(),
+  total: z.union([z.lazy(() => DecimalFilterObjectSchema), z.number()]).optional(),
   status: z.union([z.lazy(() => EnumOrderStatusFilterObjectSchema), OrderStatusSchema]).optional(),
+  paymentId: z.union([z.lazy(() => StringNullableFilterObjectSchema), z.string()]).optional().nullable(),
+  paymentStatus: z.union([z.lazy(() => EnumPaymentStatusFilterObjectSchema), PaymentStatusSchema]).optional(),
+  address: z.lazy(() => JsonNullableFilterObjectSchema).optional(),
+  notes: z.union([z.lazy(() => StringNullableFilterObjectSchema), z.string()]).optional().nullable(),
   createdAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
   updatedAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional()
 }).strict();

@@ -13,3 +13,4 @@ export { WishlistInputSchema } from './Wishlist.input';
 export { WishlistItemInputSchema } from './WishlistItem.input';
 export { OrderInputSchema } from './Order.input';
 export { OrderItemInputSchema } from './OrderItem.input';
+export { PaymentInputSchema } from './Payment.input';

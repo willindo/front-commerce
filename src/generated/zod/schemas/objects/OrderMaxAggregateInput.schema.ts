@@ -6,6 +6,9 @@ const makeSchema = () => z.object({
   userId: z.literal(true).optional(),
   total: z.literal(true).optional(),
   status: z.literal(true).optional(),
+  paymentId: z.literal(true).optional(),
+  paymentStatus: z.literal(true).optional(),
+  notes: z.literal(true).optional(),
   createdAt: z.literal(true).optional(),
   updatedAt: z.literal(true).optional()
 }).strict();

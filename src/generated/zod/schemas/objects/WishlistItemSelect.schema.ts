@@ -4,10 +4,10 @@ import { WishlistArgsObjectSchema as WishlistArgsObjectSchema } from './Wishlist
 
 const makeSchema = () => z.object({
   id: z.boolean().optional(),
-  product: z.union([z.boolean(), z.lazy(() => ProductArgsObjectSchema)]).optional(),
   productId: z.boolean().optional(),
-  wishlist: z.union([z.boolean(), z.lazy(() => WishlistArgsObjectSchema)]).optional(),
-  wishlistId: z.boolean().optional()
+  wishlistId: z.boolean().optional(),
+  product: z.union([z.boolean(), z.lazy(() => ProductArgsObjectSchema)]).optional(),
+  wishlist: z.union([z.boolean(), z.lazy(() => WishlistArgsObjectSchema)]).optional()
 }).strict();
 export const WishlistItemSelectObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const WishlistItemSelectObjectZodSchema = makeSchema();

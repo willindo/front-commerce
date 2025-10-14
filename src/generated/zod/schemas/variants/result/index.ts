@@ -13,3 +13,4 @@ export { WishlistResultSchema } from './Wishlist.result';
 export { WishlistItemResultSchema } from './WishlistItem.result';
 export { OrderResultSchema } from './Order.result';
 export { OrderItemResultSchema } from './OrderItem.result';
+export { PaymentResultSchema } from './Payment.result';

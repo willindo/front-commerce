@@ -5,8 +5,8 @@ import { CartCountOutputTypeArgsObjectSchema as CartCountOutputTypeArgsObjectSch
 
 const makeSchema = () => z.object({
   id: z.boolean().optional(),
-  user: z.union([z.boolean(), z.lazy(() => UserArgsObjectSchema)]).optional(),
   userId: z.boolean().optional(),
+  user: z.union([z.boolean(), z.lazy(() => UserArgsObjectSchema)]).optional(),
   items: z.union([z.boolean(), z.lazy(() => CartItemFindManySchema)]).optional(),
   createdAt: z.boolean().optional(),
   updatedAt: z.boolean().optional(),

@@ -7,9 +7,10 @@ export const UserAggregateResultSchema = z.object({  _count: z.object({
     role: z.number(),
     createdAt: z.number(),
     updatedAt: z.number(),
-    carts: z.number(),
+    cart: z.number(),
     orders: z.number(),
-    wishlists: z.number()
+    wishlists: z.number(),
+    payments: z.number()
   }).optional(),
   _min: z.object({
     id: z.string().nullable(),

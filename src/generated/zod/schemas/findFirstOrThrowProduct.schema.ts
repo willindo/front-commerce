@@ -15,8 +15,8 @@ export const ProductFindFirstOrThrowSelectSchema: z.ZodType<any> = z.object({
     price: z.boolean().optional(),
     stock: z.boolean().optional(),
     images: z.boolean().optional(),
-    category: z.boolean().optional(),
     categoryId: z.boolean().optional(),
+    category: z.boolean().optional(),
     gender: z.boolean().optional(),
     sizes: z.boolean().optional(),
     createdAt: z.boolean().optional(),
@@ -34,8 +34,8 @@ export const ProductFindFirstOrThrowSelectZodSchema = z.object({
     price: z.boolean().optional(),
     stock: z.boolean().optional(),
     images: z.boolean().optional(),
-    category: z.boolean().optional(),
     categoryId: z.boolean().optional(),
+    category: z.boolean().optional(),
     gender: z.boolean().optional(),
     sizes: z.boolean().optional(),
     createdAt: z.boolean().optional(),
@@ -46,6 +46,6 @@ export const ProductFindFirstOrThrowSelectZodSchema = z.object({
     _count: z.boolean().optional()
   }).strict();
 
-export const ProductFindFirstOrThrowSchema: z.ZodType<any> = z.object({ select: ProductFindFirstOrThrowSelectSchema.optional(), include: z.lazy(() => ProductIncludeObjectSchema.optional()), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
+export const ProductFindFirstOrThrowSchema: z.ZodType<any> = z.object({ select: ProductFindFirstOrThrowSelectSchema.optional(), include: ProductIncludeObjectSchema.optional(), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
-export const ProductFindFirstOrThrowZodSchema = z.object({ select: ProductFindFirstOrThrowSelectSchema.optional(), include: z.lazy(() => ProductIncludeObjectSchema.optional()), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict();
+export const ProductFindFirstOrThrowZodSchema = z.object({ select: ProductFindFirstOrThrowSelectSchema.optional(), include: ProductIncludeObjectSchema.optional(), orderBy: z.union([ProductOrderByWithRelationInputObjectSchema, ProductOrderByWithRelationInputObjectSchema.array()]).optional(), where: ProductWhereInputObjectSchema.optional(), cursor: ProductWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([ProductScalarFieldEnumSchema, ProductScalarFieldEnumSchema.array()]).optional() }).strict();

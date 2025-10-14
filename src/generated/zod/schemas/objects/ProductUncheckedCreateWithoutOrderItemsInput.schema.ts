@@ -10,7 +10,7 @@ const makeSchema = () => z.object({
   name: z.string(),
   description: z.string().optional().nullable(),
   price: z.number(),
-  stock: z.number().int(),
+  stock: z.number().int().optional(),
   images: z.union([z.lazy(() => ProductCreateimagesInputObjectSchema), z.string().array()]).optional(),
   categoryId: z.string().optional().nullable(),
   gender: GenderSchema.optional().nullable(),

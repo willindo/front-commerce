@@ -4,12 +4,12 @@ import { ProductArgsObjectSchema as ProductArgsObjectSchema } from './ProductArg
 
 const makeSchema = () => z.object({
   id: z.boolean().optional(),
-  cart: z.union([z.boolean(), z.lazy(() => CartArgsObjectSchema)]).optional(),
   cartId: z.boolean().optional(),
-  product: z.union([z.boolean(), z.lazy(() => ProductArgsObjectSchema)]).optional(),
   productId: z.boolean().optional(),
   size: z.boolean().optional(),
   quantity: z.boolean().optional(),
+  cart: z.union([z.boolean(), z.lazy(() => CartArgsObjectSchema)]).optional(),
+  product: z.union([z.boolean(), z.lazy(() => ProductArgsObjectSchema)]).optional(),
   productName: z.boolean().optional(),
   productPrice: z.boolean().optional(),
   productDescription: z.boolean().optional(),

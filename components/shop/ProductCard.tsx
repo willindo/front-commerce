@@ -17,7 +17,7 @@ export default function ProductCard({ product, onAddToCart }: Props) {
         className="w-full h-48 object-cover rounded mb-3"
       />
       <h3 className="font-medium text-lg">{product.name}</h3>
-      <p className="text-gray-600">₹{product.price.toFixed(2)}</p>
+      <p className="text-gray-600">₹{product.price}</p>
 
       <div className="mt-auto flex justify-between items-center pt-3">
         <button

@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { SortOrderSchema } from '../enums/SortOrder.schema';
+import { SortOrderInputObjectSchema as SortOrderInputObjectSchema } from './SortOrderInput.schema';
 import { OrderCountOrderByAggregateInputObjectSchema as OrderCountOrderByAggregateInputObjectSchema } from './OrderCountOrderByAggregateInput.schema';
 import { OrderAvgOrderByAggregateInputObjectSchema as OrderAvgOrderByAggregateInputObjectSchema } from './OrderAvgOrderByAggregateInput.schema';
 import { OrderMaxOrderByAggregateInputObjectSchema as OrderMaxOrderByAggregateInputObjectSchema } from './OrderMaxOrderByAggregateInput.schema';
@@ -11,6 +12,10 @@ const makeSchema = () => z.object({
   userId: SortOrderSchema.optional(),
   total: SortOrderSchema.optional(),
   status: SortOrderSchema.optional(),
+  paymentId: z.union([SortOrderSchema, z.lazy(() => SortOrderInputObjectSchema)]).optional(),
+  paymentStatus: SortOrderSchema.optional(),
+  address: z.union([SortOrderSchema, z.lazy(() => SortOrderInputObjectSchema)]).optional(),
+  notes: z.union([SortOrderSchema, z.lazy(() => SortOrderInputObjectSchema)]).optional(),
   createdAt: SortOrderSchema.optional(),
   updatedAt: SortOrderSchema.optional(),
   _count: z.lazy(() => OrderCountOrderByAggregateInputObjectSchema).optional(),

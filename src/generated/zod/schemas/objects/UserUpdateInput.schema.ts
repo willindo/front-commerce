@@ -6,7 +6,8 @@ import { EnumRoleFieldUpdateOperationsInputObjectSchema as EnumRoleFieldUpdateOp
 import { DateTimeFieldUpdateOperationsInputObjectSchema as DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
 import { CartUpdateOneWithoutUserNestedInputObjectSchema as CartUpdateOneWithoutUserNestedInputObjectSchema } from './CartUpdateOneWithoutUserNestedInput.schema';
 import { OrderUpdateManyWithoutUserNestedInputObjectSchema as OrderUpdateManyWithoutUserNestedInputObjectSchema } from './OrderUpdateManyWithoutUserNestedInput.schema';
-import { WishlistUpdateManyWithoutUserNestedInputObjectSchema as WishlistUpdateManyWithoutUserNestedInputObjectSchema } from './WishlistUpdateManyWithoutUserNestedInput.schema'
+import { WishlistUpdateManyWithoutUserNestedInputObjectSchema as WishlistUpdateManyWithoutUserNestedInputObjectSchema } from './WishlistUpdateManyWithoutUserNestedInput.schema';
+import { PaymentUpdateManyWithoutUserNestedInputObjectSchema as PaymentUpdateManyWithoutUserNestedInputObjectSchema } from './PaymentUpdateManyWithoutUserNestedInput.schema'
 
 const makeSchema = () => z.object({
   id: z.union([z.string(), z.lazy(() => StringFieldUpdateOperationsInputObjectSchema)]).optional(),
@@ -16,9 +17,10 @@ const makeSchema = () => z.object({
   role: z.union([RoleSchema, z.lazy(() => EnumRoleFieldUpdateOperationsInputObjectSchema)]).optional(),
   createdAt: z.union([z.coerce.date(), z.lazy(() => DateTimeFieldUpdateOperationsInputObjectSchema)]).optional(),
   updatedAt: z.union([z.coerce.date(), z.lazy(() => DateTimeFieldUpdateOperationsInputObjectSchema)]).optional(),
-  carts: z.lazy(() => CartUpdateOneWithoutUserNestedInputObjectSchema).optional(),
+  cart: z.lazy(() => CartUpdateOneWithoutUserNestedInputObjectSchema).optional(),
   orders: z.lazy(() => OrderUpdateManyWithoutUserNestedInputObjectSchema).optional(),
-  wishlists: z.lazy(() => WishlistUpdateManyWithoutUserNestedInputObjectSchema).optional()
+  wishlists: z.lazy(() => WishlistUpdateManyWithoutUserNestedInputObjectSchema).optional(),
+  payments: z.lazy(() => PaymentUpdateManyWithoutUserNestedInputObjectSchema).optional()
 }).strict();
 export const UserUpdateInputObjectSchema: z.ZodType<any> = makeSchema() as unknown as z.ZodType<any>;
 export const UserUpdateInputObjectZodSchema = makeSchema();

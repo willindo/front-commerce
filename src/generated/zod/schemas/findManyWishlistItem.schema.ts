@@ -10,20 +10,20 @@ import { WishlistItemScalarFieldEnumSchema } from './enums/WishlistItemScalarFie
 
 export const WishlistItemFindManySelectSchema: z.ZodType<any> = z.object({
     id: z.boolean().optional(),
-    product: z.boolean().optional(),
     productId: z.boolean().optional(),
-    wishlist: z.boolean().optional(),
-    wishlistId: z.boolean().optional()
+    wishlistId: z.boolean().optional(),
+    product: z.boolean().optional(),
+    wishlist: z.boolean().optional()
   }).strict() as unknown as z.ZodType<any>;
 
 export const WishlistItemFindManySelectZodSchema = z.object({
     id: z.boolean().optional(),
-    product: z.boolean().optional(),
     productId: z.boolean().optional(),
-    wishlist: z.boolean().optional(),
-    wishlistId: z.boolean().optional()
+    wishlistId: z.boolean().optional(),
+    product: z.boolean().optional(),
+    wishlist: z.boolean().optional()
   }).strict();
 
-export const WishlistItemFindManySchema: z.ZodType<any> = z.object({ select: WishlistItemFindManySelectSchema.optional(), include: z.lazy(() => WishlistItemIncludeObjectSchema.optional()), orderBy: z.union([WishlistItemOrderByWithRelationInputObjectSchema, WishlistItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistItemWhereInputObjectSchema.optional(), cursor: WishlistItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistItemScalarFieldEnumSchema, WishlistItemScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
+export const WishlistItemFindManySchema: z.ZodType<any> = z.object({ select: WishlistItemFindManySelectSchema.optional(), include: WishlistItemIncludeObjectSchema.optional(), orderBy: z.union([WishlistItemOrderByWithRelationInputObjectSchema, WishlistItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistItemWhereInputObjectSchema.optional(), cursor: WishlistItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistItemScalarFieldEnumSchema, WishlistItemScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
-export const WishlistItemFindManyZodSchema = z.object({ select: WishlistItemFindManySelectSchema.optional(), include: z.lazy(() => WishlistItemIncludeObjectSchema.optional()), orderBy: z.union([WishlistItemOrderByWithRelationInputObjectSchema, WishlistItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistItemWhereInputObjectSchema.optional(), cursor: WishlistItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistItemScalarFieldEnumSchema, WishlistItemScalarFieldEnumSchema.array()]).optional() }).strict();
+export const WishlistItemFindManyZodSchema = z.object({ select: WishlistItemFindManySelectSchema.optional(), include: WishlistItemIncludeObjectSchema.optional(), orderBy: z.union([WishlistItemOrderByWithRelationInputObjectSchema, WishlistItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: WishlistItemWhereInputObjectSchema.optional(), cursor: WishlistItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([WishlistItemScalarFieldEnumSchema, WishlistItemScalarFieldEnumSchema.array()]).optional() }).strict();

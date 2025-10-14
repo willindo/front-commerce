@@ -13,3 +13,4 @@ export { WishlistModelSchema } from './Wishlist.pure';
 export { WishlistItemModelSchema } from './WishlistItem.pure';
 export { OrderModelSchema } from './Order.pure';
 export { OrderItemModelSchema } from './OrderItem.pure';
+export { PaymentModelSchema } from './Payment.pure';

@@ -10,8 +10,8 @@ import { CartScalarFieldEnumSchema } from './enums/CartScalarFieldEnum.schema';
 
 export const CartFindManySelectSchema: z.ZodType<any> = z.object({
     id: z.boolean().optional(),
-    user: z.boolean().optional(),
     userId: z.boolean().optional(),
+    user: z.boolean().optional(),
     items: z.boolean().optional(),
     createdAt: z.boolean().optional(),
     updatedAt: z.boolean().optional(),
@@ -20,14 +20,14 @@ export const CartFindManySelectSchema: z.ZodType<any> = z.object({
 
 export const CartFindManySelectZodSchema = z.object({
     id: z.boolean().optional(),
-    user: z.boolean().optional(),
     userId: z.boolean().optional(),
+    user: z.boolean().optional(),
     items: z.boolean().optional(),
     createdAt: z.boolean().optional(),
     updatedAt: z.boolean().optional(),
     _count: z.boolean().optional()
   }).strict();
 
-export const CartFindManySchema: z.ZodType<any> = z.object({ select: CartFindManySelectSchema.optional(), include: z.lazy(() => CartIncludeObjectSchema.optional()), orderBy: z.union([CartOrderByWithRelationInputObjectSchema, CartOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartWhereInputObjectSchema.optional(), cursor: CartWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartScalarFieldEnumSchema, CartScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
+export const CartFindManySchema: z.ZodType<any> = z.object({ select: CartFindManySelectSchema.optional(), include: CartIncludeObjectSchema.optional(), orderBy: z.union([CartOrderByWithRelationInputObjectSchema, CartOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartWhereInputObjectSchema.optional(), cursor: CartWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartScalarFieldEnumSchema, CartScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
-export const CartFindManyZodSchema = z.object({ select: CartFindManySelectSchema.optional(), include: z.lazy(() => CartIncludeObjectSchema.optional()), orderBy: z.union([CartOrderByWithRelationInputObjectSchema, CartOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartWhereInputObjectSchema.optional(), cursor: CartWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartScalarFieldEnumSchema, CartScalarFieldEnumSchema.array()]).optional() }).strict();
+export const CartFindManyZodSchema = z.object({ select: CartFindManySelectSchema.optional(), include: CartIncludeObjectSchema.optional(), orderBy: z.union([CartOrderByWithRelationInputObjectSchema, CartOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartWhereInputObjectSchema.optional(), cursor: CartWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartScalarFieldEnumSchema, CartScalarFieldEnumSchema.array()]).optional() }).strict();

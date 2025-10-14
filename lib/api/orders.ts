@@ -1,34 +1,20 @@
-// lib/api/orders.ts
-import { api } from "./axios";
-
-export type OrderItem = {
-  id: string;
-  productId: string;
-  quantity: number;
-  price: number;
-};
-
-export type Order = {
-  id: string;
-  userId: string;
-  total: number;
-  items: OrderItem[];
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export async function createOrder(cartId: string): Promise<Order> {
-  const { data } = await api.post(`/orders`, { cartId });
-  return data;
+export async function fetchOrders(userId: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-user-id": userId, // temp header if auth not yet integrated
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Failed to fetch orders");
+  return res.json();
 }
 
-export async function getOrders(userId: string): Promise<Order[]> {
-  const { data } = await api.get(`/orders/user/${userId}`);
-  return data;
-}
-
-export async function getOrderById(orderId: string): Promise<Order> {
-  const { data } = await api.get(`/orders/${orderId}`);
-  return data;
+export async function cancelOrder(orderId: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/orders/${orderId}/cancel`,
+    { method: "POST" }
+  );
+  if (!res.ok) throw new Error("Failed to cancel order");
+  return res.json();
 }

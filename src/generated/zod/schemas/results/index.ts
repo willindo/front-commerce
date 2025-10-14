@@ -128,3 +128,16 @@ export { OrderItemDeleteManyResultSchema } from './OrderItemDeleteManyResult.sch
 export { OrderItemAggregateResultSchema } from './OrderItemAggregateResult.schema';
 export { OrderItemGroupByResultSchema } from './OrderItemGroupByResult.schema';
 export { OrderItemCountResultSchema } from './OrderItemCountResult.schema';
+export { PaymentFindUniqueResultSchema } from './PaymentFindUniqueResult.schema';
+export { PaymentFindFirstResultSchema } from './PaymentFindFirstResult.schema';
+export { PaymentFindManyResultSchema } from './PaymentFindManyResult.schema';
+export { PaymentCreateResultSchema } from './PaymentCreateResult.schema';
+export { PaymentCreateManyResultSchema } from './PaymentCreateManyResult.schema';
+export { PaymentUpdateResultSchema } from './PaymentUpdateResult.schema';
+export { PaymentUpdateManyResultSchema } from './PaymentUpdateManyResult.schema';
+export { PaymentUpsertResultSchema } from './PaymentUpsertResult.schema';
+export { PaymentDeleteResultSchema } from './PaymentDeleteResult.schema';
+export { PaymentDeleteManyResultSchema } from './PaymentDeleteManyResult.schema';
+export { PaymentAggregateResultSchema } from './PaymentAggregateResult.schema';
+export { PaymentGroupByResultSchema } from './PaymentGroupByResult.schema';
+export { PaymentCountResultSchema } from './PaymentCountResult.schema';

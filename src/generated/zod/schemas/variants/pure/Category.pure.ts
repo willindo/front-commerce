@@ -7,4 +7,4 @@ export const CategoryModelSchema = z.object({
     products: z.array(z.unknown())
 }).strict();
 
-export type CategoryModelType = z.infer<typeof CategoryModelSchema>;
+export type CategoryPureType = z.infer<typeof CategoryModelSchema>;

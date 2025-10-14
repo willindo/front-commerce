@@ -7,7 +7,8 @@ import { DateTimeFilterObjectSchema as DateTimeFilterObjectSchema } from './Date
 import { CartNullableScalarRelationFilterObjectSchema as CartNullableScalarRelationFilterObjectSchema } from './CartNullableScalarRelationFilter.schema';
 import { CartWhereInputObjectSchema as CartWhereInputObjectSchema } from './CartWhereInput.schema';
 import { OrderListRelationFilterObjectSchema as OrderListRelationFilterObjectSchema } from './OrderListRelationFilter.schema';
-import { WishlistListRelationFilterObjectSchema as WishlistListRelationFilterObjectSchema } from './WishlistListRelationFilter.schema'
+import { WishlistListRelationFilterObjectSchema as WishlistListRelationFilterObjectSchema } from './WishlistListRelationFilter.schema';
+import { PaymentListRelationFilterObjectSchema as PaymentListRelationFilterObjectSchema } from './PaymentListRelationFilter.schema'
 
 const userwhereinputSchema = z.object({
   AND: z.union([z.lazy(() => UserWhereInputObjectSchema), z.lazy(() => UserWhereInputObjectSchema).array()]).optional(),
@@ -20,9 +21,10 @@ const userwhereinputSchema = z.object({
   role: z.union([z.lazy(() => EnumRoleFilterObjectSchema), RoleSchema]).optional(),
   createdAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
   updatedAt: z.union([z.lazy(() => DateTimeFilterObjectSchema), z.coerce.date()]).optional(),
-  carts: z.union([z.lazy(() => CartNullableScalarRelationFilterObjectSchema), z.lazy(() => CartWhereInputObjectSchema)]).optional(),
+  cart: z.union([z.lazy(() => CartNullableScalarRelationFilterObjectSchema), z.lazy(() => CartWhereInputObjectSchema)]).optional(),
   orders: z.lazy(() => OrderListRelationFilterObjectSchema).optional(),
-  wishlists: z.lazy(() => WishlistListRelationFilterObjectSchema).optional()
+  wishlists: z.lazy(() => WishlistListRelationFilterObjectSchema).optional(),
+  payments: z.lazy(() => PaymentListRelationFilterObjectSchema).optional()
 }).strict();
 export const UserWhereInputObjectSchema: z.ZodType<any> = userwhereinputSchema as unknown as z.ZodType<any>;
 export const UserWhereInputObjectZodSchema = userwhereinputSchema;

@@ -3,8 +3,8 @@ import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFi
 import { EnumSizeNullableFilterObjectSchema as EnumSizeNullableFilterObjectSchema } from './EnumSizeNullableFilter.schema';
 import { SizeSchema } from '../enums/Size.schema';
 import { IntFilterObjectSchema as IntFilterObjectSchema } from './IntFilter.schema';
-import { StringNullableFilterObjectSchema as StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
-import { FloatNullableFilterObjectSchema as FloatNullableFilterObjectSchema } from './FloatNullableFilter.schema'
+import { DecimalFilterObjectSchema as DecimalFilterObjectSchema } from './DecimalFilter.schema';
+import { StringNullableFilterObjectSchema as StringNullableFilterObjectSchema } from './StringNullableFilter.schema'
 
 const cartitemscalarwhereinputSchema = z.object({
   AND: z.union([z.lazy(() => CartItemScalarWhereInputObjectSchema), z.lazy(() => CartItemScalarWhereInputObjectSchema).array()]).optional(),
@@ -15,8 +15,8 @@ const cartitemscalarwhereinputSchema = z.object({
   productId: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
   size: z.union([z.lazy(() => EnumSizeNullableFilterObjectSchema), SizeSchema]).optional().nullable(),
   quantity: z.union([z.lazy(() => IntFilterObjectSchema), z.number().int()]).optional(),
-  productName: z.union([z.lazy(() => StringNullableFilterObjectSchema), z.string()]).optional().nullable(),
-  productPrice: z.union([z.lazy(() => FloatNullableFilterObjectSchema), z.number()]).optional().nullable(),
+  productName: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
+  productPrice: z.union([z.lazy(() => DecimalFilterObjectSchema), z.number()]).optional(),
   productDescription: z.union([z.lazy(() => StringNullableFilterObjectSchema), z.string()]).optional().nullable(),
   productImage: z.union([z.lazy(() => StringNullableFilterObjectSchema), z.string()]).optional().nullable()
 }).strict();

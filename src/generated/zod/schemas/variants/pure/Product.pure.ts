@@ -9,8 +9,8 @@ export const ProductModelSchema = z.object({
     price: z.number(),
     stock: z.number().int(),
     images: z.array(z.string()),
-    category: z.unknown().nullable(),
     categoryId: z.string().nullable(),
+    category: z.unknown().nullable(),
     gender: GenderSchema.nullable(),
     sizes: z.array(z.unknown()),
     createdAt: z.date(),
@@ -20,4 +20,4 @@ export const ProductModelSchema = z.object({
     orderItems: z.array(z.unknown())
 }).strict();
 
-export type ProductModelType = z.infer<typeof ProductModelSchema>;
+export type ProductPureType = z.infer<typeof ProductModelSchema>;

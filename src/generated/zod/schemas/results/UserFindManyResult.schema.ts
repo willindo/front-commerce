@@ -8,9 +8,10 @@ export const UserFindManyResultSchema = z.object({
   role: z.unknown(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  carts: z.unknown().optional(),
+  cart: z.unknown().optional(),
   orders: z.array(z.unknown()),
-  wishlists: z.array(z.unknown())
+  wishlists: z.array(z.unknown()),
+  payments: z.array(z.unknown())
 })),
   pagination: z.object({
   page: z.number().int().min(1),

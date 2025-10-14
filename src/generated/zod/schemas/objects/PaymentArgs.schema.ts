@@ -1,0 +1,10 @@
+import * as z from 'zod';
+import { PaymentSelectObjectSchema as PaymentSelectObjectSchema } from './PaymentSelect.schema';
+import { PaymentIncludeObjectSchema as PaymentIncludeObjectSchema } from './PaymentInclude.schema'
+
+const makeSchema = () => z.object({
+  select: z.lazy(() => PaymentSelectObjectSchema).optional(),
+  include: z.lazy(() => PaymentIncludeObjectSchema).optional()
+}).strict();
+export const PaymentArgsObjectSchema = makeSchema();
+export const PaymentArgsObjectZodSchema = makeSchema();

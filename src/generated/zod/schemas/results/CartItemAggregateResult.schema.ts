@@ -1,12 +1,12 @@
 import * as z from 'zod';
 export const CartItemAggregateResultSchema = z.object({  _count: z.object({
     id: z.number(),
-    cart: z.number(),
     cartId: z.number(),
-    product: z.number(),
     productId: z.number(),
     size: z.number(),
     quantity: z.number(),
+    cart: z.number(),
+    product: z.number(),
     productName: z.number(),
     productPrice: z.number(),
     productDescription: z.number(),

@@ -6,6 +6,9 @@ const makeSchema = () => z.object({
   userId: SortOrderSchema.optional(),
   total: SortOrderSchema.optional(),
   status: SortOrderSchema.optional(),
+  paymentId: SortOrderSchema.optional(),
+  paymentStatus: SortOrderSchema.optional(),
+  notes: SortOrderSchema.optional(),
   createdAt: SortOrderSchema.optional(),
   updatedAt: SortOrderSchema.optional()
 }).strict();

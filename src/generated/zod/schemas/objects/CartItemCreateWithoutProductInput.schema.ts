@@ -6,8 +6,8 @@ const makeSchema = () => z.object({
   id: z.string().optional(),
   size: SizeSchema.optional().nullable(),
   quantity: z.number().int().optional(),
-  productName: z.string().optional().nullable(),
-  productPrice: z.number().optional().nullable(),
+  productName: z.string(),
+  productPrice: z.number(),
   productDescription: z.string().optional().nullable(),
   productImage: z.string().optional().nullable(),
   cart: z.lazy(() => CartCreateNestedOneWithoutItemsInputObjectSchema)

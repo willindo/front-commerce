@@ -10,12 +10,12 @@ import { CartItemScalarFieldEnumSchema } from './enums/CartItemScalarFieldEnum.s
 
 export const CartItemFindFirstSelectSchema: z.ZodType<any> = z.object({
     id: z.boolean().optional(),
-    cart: z.boolean().optional(),
     cartId: z.boolean().optional(),
-    product: z.boolean().optional(),
     productId: z.boolean().optional(),
     size: z.boolean().optional(),
     quantity: z.boolean().optional(),
+    cart: z.boolean().optional(),
+    product: z.boolean().optional(),
     productName: z.boolean().optional(),
     productPrice: z.boolean().optional(),
     productDescription: z.boolean().optional(),
@@ -24,18 +24,18 @@ export const CartItemFindFirstSelectSchema: z.ZodType<any> = z.object({
 
 export const CartItemFindFirstSelectZodSchema = z.object({
     id: z.boolean().optional(),
-    cart: z.boolean().optional(),
     cartId: z.boolean().optional(),
-    product: z.boolean().optional(),
     productId: z.boolean().optional(),
     size: z.boolean().optional(),
     quantity: z.boolean().optional(),
+    cart: z.boolean().optional(),
+    product: z.boolean().optional(),
     productName: z.boolean().optional(),
     productPrice: z.boolean().optional(),
     productDescription: z.boolean().optional(),
     productImage: z.boolean().optional()
   }).strict();
 
-export const CartItemFindFirstSchema: z.ZodType<any> = z.object({ select: CartItemFindFirstSelectSchema.optional(), include: z.lazy(() => CartItemIncludeObjectSchema.optional()), orderBy: z.union([CartItemOrderByWithRelationInputObjectSchema, CartItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartItemWhereInputObjectSchema.optional(), cursor: CartItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartItemScalarFieldEnumSchema, CartItemScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
+export const CartItemFindFirstSchema: z.ZodType<any> = z.object({ select: CartItemFindFirstSelectSchema.optional(), include: CartItemIncludeObjectSchema.optional(), orderBy: z.union([CartItemOrderByWithRelationInputObjectSchema, CartItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartItemWhereInputObjectSchema.optional(), cursor: CartItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartItemScalarFieldEnumSchema, CartItemScalarFieldEnumSchema.array()]).optional() }).strict() as unknown as z.ZodType<any>;
 
-export const CartItemFindFirstZodSchema = z.object({ select: CartItemFindFirstSelectSchema.optional(), include: z.lazy(() => CartItemIncludeObjectSchema.optional()), orderBy: z.union([CartItemOrderByWithRelationInputObjectSchema, CartItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartItemWhereInputObjectSchema.optional(), cursor: CartItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartItemScalarFieldEnumSchema, CartItemScalarFieldEnumSchema.array()]).optional() }).strict();
+export const CartItemFindFirstZodSchema = z.object({ select: CartItemFindFirstSelectSchema.optional(), include: CartItemIncludeObjectSchema.optional(), orderBy: z.union([CartItemOrderByWithRelationInputObjectSchema, CartItemOrderByWithRelationInputObjectSchema.array()]).optional(), where: CartItemWhereInputObjectSchema.optional(), cursor: CartItemWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), distinct: z.union([CartItemScalarFieldEnumSchema, CartItemScalarFieldEnumSchema.array()]).optional() }).strict();

@@ -10,9 +10,10 @@ export const UserInputSchema = z.object({
     role: RoleSchema,
     createdAt: z.date(),
     updatedAt: z.date(),
-    carts: z.unknown().optional().nullable(),
+    cart: z.unknown().optional().nullable(),
     orders: z.array(z.unknown()),
-    wishlists: z.array(z.unknown())
+    wishlists: z.array(z.unknown()),
+    payments: z.array(z.unknown())
 }).strict();
 
 export type UserInputType = z.infer<typeof UserInputSchema>;

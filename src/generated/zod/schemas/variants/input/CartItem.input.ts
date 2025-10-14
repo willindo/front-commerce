@@ -4,14 +4,14 @@ import { SizeSchema } from '../../enums/Size.schema';
 // prettier-ignore
 export const CartItemInputSchema = z.object({
     id: z.string(),
-    cart: z.unknown(),
     cartId: z.string(),
-    product: z.unknown(),
     productId: z.string(),
     size: SizeSchema.optional().nullable(),
     quantity: z.number().int(),
-    productName: z.string().optional().nullable(),
-    productPrice: z.number().optional().nullable(),
+    cart: z.unknown(),
+    product: z.unknown(),
+    productName: z.string(),
+    productPrice: z.number(),
     productDescription: z.string().optional().nullable(),
     productImage: z.string().optional().nullable()
 }).strict();

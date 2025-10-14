@@ -11,4 +11,4 @@ export const OrderItemModelSchema = z.object({
     product: z.unknown()
 }).strict();
 
-export type OrderItemModelType = z.infer<typeof OrderItemModelSchema>;
+export type OrderItemPureType = z.infer<typeof OrderItemModelSchema>;

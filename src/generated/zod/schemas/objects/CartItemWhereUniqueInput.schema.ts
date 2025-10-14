@@ -1,13 +1,13 @@
 import * as z from 'zod';
-import { CartItemCartIdProductIdCompoundUniqueInputObjectSchema as CartItemCartIdProductIdCompoundUniqueInputObjectSchema } from './CartItemCartIdProductIdCompoundUniqueInput.schema'
+import { CartItemCartIdProductIdSizeCompoundUniqueInputObjectSchema as CartItemCartIdProductIdSizeCompoundUniqueInputObjectSchema } from './CartItemCartIdProductIdSizeCompoundUniqueInput.schema'
 
 const makeSchema = () => z.object({
   id: z.string().optional(),
-  cartId_productId: z.lazy(() => CartItemCartIdProductIdCompoundUniqueInputObjectSchema).optional()
+  cartId_productId_size: z.lazy(() => CartItemCartIdProductIdSizeCompoundUniqueInputObjectSchema).optional()
 }).strict().superRefine((obj, ctx) => {
         const presentTop = (k: string) => (obj as any)[k] != null;
         const singles: string[] = ["id"] as string[];
-        const groups: string[][] = [["cartId","productId"]] as string[][];
+        const groups: string[][] = [["cartId","productId","size"]] as string[][];
 
         const anySingle = Array.isArray(singles) && singles.length > 0 ? singles.some(presentTop) : false;
 

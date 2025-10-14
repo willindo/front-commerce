@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { StringFilterObjectSchema as StringFilterObjectSchema } from './StringFilter.schema';
 import { IntFilterObjectSchema as IntFilterObjectSchema } from './IntFilter.schema';
-import { FloatFilterObjectSchema as FloatFilterObjectSchema } from './FloatFilter.schema';
+import { DecimalFilterObjectSchema as DecimalFilterObjectSchema } from './DecimalFilter.schema';
 import { OrderScalarRelationFilterObjectSchema as OrderScalarRelationFilterObjectSchema } from './OrderScalarRelationFilter.schema';
 import { OrderWhereInputObjectSchema as OrderWhereInputObjectSchema } from './OrderWhereInput.schema';
 import { ProductScalarRelationFilterObjectSchema as ProductScalarRelationFilterObjectSchema } from './ProductScalarRelationFilter.schema';
@@ -15,7 +15,7 @@ const orderitemwhereinputSchema = z.object({
   orderId: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
   productId: z.union([z.lazy(() => StringFilterObjectSchema), z.string()]).optional(),
   quantity: z.union([z.lazy(() => IntFilterObjectSchema), z.number().int()]).optional(),
-  priceAtPurchase: z.union([z.lazy(() => FloatFilterObjectSchema), z.number()]).optional(),
+  priceAtPurchase: z.union([z.lazy(() => DecimalFilterObjectSchema), z.number()]).optional(),
   order: z.union([z.lazy(() => OrderScalarRelationFilterObjectSchema), z.lazy(() => OrderWhereInputObjectSchema)]).optional(),
   product: z.union([z.lazy(() => ProductScalarRelationFilterObjectSchema), z.lazy(() => ProductWhereInputObjectSchema)]).optional()
 }).strict();
