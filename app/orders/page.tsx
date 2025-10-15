@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { fetchOrders, cancelOrder } from "@/lib/api/orders";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
 type Order = {
   id: string;
@@ -17,6 +18,7 @@ type Order = {
 };
 
 export default function OrdersPage() {
+  const { user } = useProtectedRoute();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

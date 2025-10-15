@@ -1,9 +1,8 @@
-// context/AuthContext.tsx
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { User } from "../lib/types/users";
-import { loginUser, registerUser } from "../lib/aply";
+import { api } from "@/lib/api/axios";
+import { User } from "@/lib/types/users";
 
 type AuthContextValue = {
   user: User | null;
@@ -12,9 +11,9 @@ type AuthContextValue = {
     email: string;
     password: string;
     name?: string;
-  }) => Promise<User>;
-  login: (data: { email: string; password: string }) => Promise<User>;
-  logout: () => void;
+  }) => Promise<void>;
+  login: (data: { email: string; password: string }) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -23,43 +22,35 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Load user from localStorage on app mount
+  // ✅ Load user session from backend
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch {
-        localStorage.removeItem("user");
-      }
-    }
-    setLoading(false);
+    api
+      .get("/auth/me")
+      .then((res) => setUser(res.data.user))
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
   }, []);
-
-  const saveUser = (user: User) => {
-    setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
-  };
 
   const register = async (data: {
     email: string;
     password: string;
     name?: string;
   }) => {
-    const returnedUser = await registerUser(data);
-    saveUser(returnedUser);
-    return returnedUser;
+    await api.post("/auth/register", data);
+    const res = await api.get("/auth/me");
+    setUser(res.data.user);
   };
 
   const login = async (data: { email: string; password: string }) => {
-    const result = await loginUser(data);
-    saveUser(result.user);
-    return result.user;
+    await api.post("/auth/login", data);
+    const res = await api.get("/auth/me");
+    setUser(res.data.user);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await api.post("/auth/logout");
     setUser(null);
-    localStorage.removeItem("user");
+    window.location.href = "/";
   };
 
   return (

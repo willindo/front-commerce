@@ -20,20 +20,9 @@ export type Cart = {
   createdAt: string;
   updatedAt: string;
 };
-export type VerifiedItem = {
-  id: string;
-  productId: string;
-  productName: string;
-  productImage: string | null;
-  price: number;
-  quantity: number;
-  subtotal: number;
-  reason?: string;
-};
 
 export type VerifyCartResponse = {
   cartId: string;
-  userId: string;
   items: {
     id: string;
     productId: string;
@@ -56,22 +45,17 @@ export type VerifyCartResponse = {
   verifiedAt: string;
 };
 
-// Temporary user until auth is integrated
-const TEMP_USER_ID = "2b38ae62-d82f-4034-8419-c4c4737473ed";
+// ✅ Authenticated-only endpoints (no userId in URL)
+export async function getCart(): Promise<Cart> {
+  const { data } = await api.get(`/cart`);
+  return data;
+}
 
 export async function addToCart(
   productId: string,
   quantity = 1
 ): Promise<Cart> {
-  const { data } = await api.post(`/cart/${TEMP_USER_ID}/add`, {
-    productId,
-    quantity,
-  });
-  return data;
-}
-
-export async function getCart(): Promise<Cart> {
-  const { data } = await api.get(`/cart/${TEMP_USER_ID}`);
+  const { data } = await api.post(`/cart/add`, { productId, quantity });
   return data;
 }
 
@@ -79,24 +63,21 @@ export async function updateCartItem(
   itemId: string,
   quantity: number
 ): Promise<Cart> {
-  const { data } = await api.put(`/cart/${TEMP_USER_ID}/update`, {
-    itemId,
-    quantity,
-  });
+  const { data } = await api.put(`/cart/update`, { itemId, quantity });
   return data;
 }
 
 export async function removeCartItem(itemId: string): Promise<Cart> {
-  const { data } = await api.delete(`/cart/${TEMP_USER_ID}/item/${itemId}`);
+  const { data } = await api.delete(`/cart/item/${itemId}`);
   return data;
 }
 
 export async function clearCart(): Promise<Cart> {
-  const { data } = await api.delete(`/cart/${TEMP_USER_ID}/clear`);
+  const { data } = await api.delete(`/cart/clear`);
   return data;
 }
 
-export async function verifyCart(userId: string): Promise<VerifyCartResponse> {
-  const { data } = await api.get(`/cart/${userId}/verify`);
+export async function verifyCart(): Promise<VerifyCartResponse> {
+  const { data } = await api.get(`/cart/verify`);
   return data;
 }

@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import Nav from "@/components/Nav";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
 export default function ProfilePage() {
-  const { user, loading } = useAuth();
+  const { user, loading } = useProtectedRoute();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +19,6 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Nav />
       <main className="max-w-2xl mx-auto mt-12 bg-white p-6 rounded shadow">
         <h1 className="text-2xl font-semibold mb-4">Profile</h1>
         <p>

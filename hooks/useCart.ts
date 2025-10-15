@@ -13,7 +13,7 @@ export function useCart() {
 
   // ✅ Mutations
   const addMutation = useMutation<Cart, Error, AddToCartInput>({
-    // mutationFn: addToCart,
+    // mutationFn: ({ productId, quantity }) => addToCart(productId, quantity),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
