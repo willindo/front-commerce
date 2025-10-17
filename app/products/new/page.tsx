@@ -1,58 +1,52 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CreateProductDto } from "@/lib/types/products";
 import { useCreateProduct } from "@/hooks/useProducts";
+import { useRouter } from "next/navigation";
 
 export default function NewProductPage() {
+  const { register, handleSubmit, reset } = useForm<CreateProductDto>({
+    resolver: zodResolver(CreateProductDto as any),
+  });
+  const createMutation = useCreateProduct();
   const router = useRouter();
-  const { mutateAsync: create } = useCreateProduct();
-  const [form, setForm] = useState({ name: "", price: "", stock: "" });
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    await create({
-      name: form.name,
-      price: Number(form.price),
-      stock: Number(form.stock),
-    });
-    router.push("/products");
-  }
+  const onSubmit = async (formData: CreateProductDto) => {
+    await createMutation.mutateAsync(formData);
+    reset();
+    router.push("/admin/products");
+  };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Create Product</h1>
-      <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
-        <input
-          type="text"
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full border p-2 rounded"
-          required
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={form.price}
-          onChange={(e) => setForm({ ...form, price: e.target.value })}
-          className="w-full border p-2 rounded"
-          required
-        />
-        <input
-          type="number"
-          placeholder="Stock"
-          value={form.stock}
-          onChange={(e) => setForm({ ...form, stock: e.target.value })}
-          className="w-full border p-2 rounded"
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Save
-        </button>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-md mx-auto mt-6 space-y-3"
+    >
+      <input
+        {...register("name")}
+        placeholder="Name"
+        className="border p-2 w-full"
+      />
+      <input
+        {...register("price", { valueAsNumber: true })}
+        type="number"
+        placeholder="Price"
+      />
+      <input
+        {...register("stock", { valueAsNumber: true })}
+        type="number"
+        placeholder="Stock"
+      />
+      <textarea {...register("description")} placeholder="Description" />
+      <button
+        type="submit"
+        disabled={createMutation.isPending}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        {createMutation.isPending ? "Saving..." : "Create Product"}
+      </button>
+    </form>
   );
 }

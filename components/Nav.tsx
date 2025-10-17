@@ -15,7 +15,7 @@ export default function Nav() {
           Shop
         </Link>
 
-        {user?.role === "ADMIN" && (
+        {(user?.role === "ADMIN" || user?.role === "CUSTOMER") && (
           <>
             <Link href="/users" className="hover:underline">
               Users

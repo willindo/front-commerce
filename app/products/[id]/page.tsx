@@ -1,21 +1,25 @@
-"use client";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { fetchProductById } from "@/lib/api/products";
+import ProductDetail from "./ProductDetail";
 
-import { useProduct } from "@/hooks/useProducts";
-import { useParams } from "next/navigation";
-
-export default function ProductDetailPage() {
-  const { id } = useParams();
-  const { data: product, isLoading, error } = useProduct(id as string);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error || !product) return <p>Product not found.</p>;
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const qc = new QueryClient();
+  await qc.prefetchQuery({
+    queryKey: ["product", params.id],
+    queryFn: () => fetchProductById(params.id),
+  });
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">{product.name}</h1>
-      <p className="text-lg">${product.price}</p>
-      <p>Stock: {product.stock}</p>
-      {product.description && <p className="mt-2">{product.description}</p>}
-    </div>
+    <HydrationBoundary state={dehydrate(qc)}>
+      <ProductDetail id={params.id} />
+    </HydrationBoundary>
   );
 }
